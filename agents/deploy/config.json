@@ -1,0 +1,34 @@
+{
+  "environments": {
+    "staging": {
+      "url": "https://staging.example.com",
+      "health_endpoint": "/api/health",
+      "deploy_command": "vercel deploy --env preview",
+      "auto_deploy_on_merge": false
+    },
+    "production": {
+      "url": "https://app.example.com",
+      "health_endpoint": "/api/health",
+      "deploy_command": "vercel deploy --prod",
+      "requires_staging_verification": true
+    }
+  },
+  "pre_flight": {
+    "required_branch_for_production": "main",
+    "test_command": "npm test",
+    "build_command": "npm run build",
+    "audit_level": "high"
+  },
+  "verification": {
+    "health_check_timeout_seconds": 30,
+    "health_check_retries": 3,
+    "smoke_test_endpoints": [
+      "/api/health",
+      "/api/v1/status"
+    ]
+  },
+  "rollback": {
+    "auto_rollback_on_health_failure": true,
+    "max_rollback_versions": 3
+  }
+}

@@ -1,0 +1,4 @@
+{
+  // Line length disabled for prose-heavy documentation files
+  "MD013": false
+}

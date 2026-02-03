@@ -1,0 +1,35 @@
+{
+  "directories": {
+    "drafts": "content/drafts/",
+    "published": "content/published/",
+    "archive": "content/archive/"
+  },
+  "style": {
+    "voice": "first person, practitioner perspective",
+    "tone": "direct, opinionated, no hedging",
+    "paragraph_max_sentences": 4,
+    "avoid_phrases": [
+      "In today's world",
+      "It's worth noting",
+      "At the end of the day",
+      "It goes without saying",
+      "In conclusion"
+    ]
+  },
+  "pipeline": {
+    "max_concurrent_drafts": 3,
+    "overdue_threshold_days": 14,
+    "stages": ["idea", "drafting", "review", "ready", "published"]
+  },
+  "word_count": {
+    "article_min": 800,
+    "article_max": 2500,
+    "short_form_min": 200,
+    "short_form_max": 500
+  },
+  "publishing": {
+    "platform": "substack",
+    "cross_post": ["linkedin"],
+    "generate_social_copy": true
+  }
+}

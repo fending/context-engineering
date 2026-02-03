@@ -1,0 +1,33 @@
+{
+  "last_updated": "2026-01-15T14:30:00Z",
+  "deploying": false,
+  "last_deploy": {
+    "timestamp": "2026-01-15T14:25:00Z",
+    "environment": "production",
+    "version": "abc1234",
+    "status": "success",
+    "duration_seconds": 45
+  },
+  "staging_verified": true,
+  "staging_version": "abc1234",
+  "deploy_history": [
+    {
+      "timestamp": "2026-01-15T14:25:00Z",
+      "environment": "production",
+      "version": "abc1234",
+      "status": "success"
+    },
+    {
+      "timestamp": "2026-01-15T13:50:00Z",
+      "environment": "staging",
+      "version": "abc1234",
+      "status": "success"
+    },
+    {
+      "timestamp": "2026-01-12T10:15:00Z",
+      "environment": "production",
+      "version": "def5678",
+      "status": "success"
+    }
+  ]
+}

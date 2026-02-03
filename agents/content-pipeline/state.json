@@ -1,0 +1,39 @@
+{
+  "last_updated": "2026-01-20T09:00:00Z",
+  "pipeline": [
+    {
+      "id": "context-engineering-patterns",
+      "title": "Context Engineering Patterns That Actually Work",
+      "stage": "drafting",
+      "file": "content/drafts/context-engineering-patterns.md",
+      "created": "2026-01-18",
+      "last_touched": "2026-01-20",
+      "days_in_stage": 2,
+      "tags": ["ai", "development", "context-engineering"]
+    },
+    {
+      "id": "governance-gap-part-5",
+      "title": "The Governance Gap, Part 5",
+      "stage": "review",
+      "file": "content/drafts/governance-gap-part-5.md",
+      "created": "2026-01-10",
+      "last_touched": "2026-01-18",
+      "days_in_stage": 2,
+      "tags": ["governance", "nist", "ai-rmf"]
+    }
+  ],
+  "recently_published": [
+    {
+      "id": "mcp-security-problem",
+      "title": "The MCP Security Problem",
+      "published_date": "2026-01-05",
+      "platform": "substack",
+      "url": "https://example.substack.com/p/mcp-security-problem"
+    }
+  ],
+  "metrics": {
+    "articles_published_this_month": 1,
+    "articles_published_this_quarter": 4,
+    "average_days_to_publish": 12
+  }
+}

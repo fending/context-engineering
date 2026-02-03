@@ -1,0 +1,30 @@
+{
+  "jira": {
+    "instance": "yourteam.atlassian.net",
+    "projects": {
+      "ENG": "Engineering work",
+      "CONTENT": "Content production",
+      "OPS": "Operations and infrastructure"
+    }
+  },
+  "google": {
+    "gmail_account": "team@example.com",
+    "calendar": "primary"
+  },
+  "directories": {
+    "content": "content/",
+    "standups": "standups/",
+    "reports": "reports/"
+  },
+  "sibling_workspaces": {
+    "marketing": "../marketing/",
+    "docs": "../docs/"
+  },
+  "agent_dependencies": {
+    "standup": ["content-pipeline", "deploy"]
+  },
+  "schemas": {
+    "directory": "agents/schemas/",
+    "validation": "optional"
+  }
+}
