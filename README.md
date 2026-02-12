@@ -39,6 +39,11 @@ context-engineering/
 │       ├── agent.md
 │       ├── config.json
 │       └── state.json
+├── agent-teams/                    # Multi-agent teams (with optional Jira integration)
+│   ├── README.md                   # Activation, team structure, phases, optional Jira sync
+│   ├── jira-setup.md               # One-time Jira configuration (optional)
+│   ├── claude-md-jira-section.md   # CLAUDE.md template for Jira sync protocol (optional)
+│   └── team-structure.md           # AGENT_TEAMS.md template for team composition
 └── evolution.md                    # What changed since June 2025
 ```
 
@@ -53,6 +58,8 @@ This isn't a spectrum with a right answer. It's a function of your project's com
 **Use cascading context** when you work across multiple projects and want consistent defaults (coding style, error handling patterns, tool preferences) without repeating yourself. Global settings cascade down; project-level files override; subdirectory files specialize further.
 
 **Add agents** when you have recurring multi-step workflows that benefit from structured instructions, persistent state, and shared configuration. Agents aren't just prompts -- they're workflow definitions with their own config and runtime state.
+
+**Use agent teams** when the work is large enough to split across parallel tracks. Agent teams build on the same foundation as individual agents but add multi-agent coordination: ownership boundaries, shared interface contracts, and phased development. Optionally, sync agent progress to Jira for external visibility and bidirectional feedback.
 
 ## Key Principles
 

@@ -80,6 +80,18 @@ Agents also introduced the concept of "autonomous actions" -- things the AI shou
 
 See the [agents/](agents/) directory for working examples.
 
+## Agent Teams
+
+The agent-as-workflow pattern handles one agent running one workflow. Agent teams extend this to multiple agents working in parallel on a shared codebase.
+
+The pattern emerged from a practical observation: when a project is large enough to split into parallel tracks (frontend/backend, feature A/feature B), a single agent session either hits context limits or moves sequentially through work that could be concurrent. Agent teams formalize the coordination: each teammate owns a scope, builds against shared interface contracts, and the work follows a phased structure (scaffolding, parallel build, integration).
+
+The key design decision is ownership boundaries. Two teams with clear directory ownership (one owns pages and components, the other owns API routes and database) can work in parallel without merge conflicts. Within each team, a lead coordinates and resolves conflicts. This matters more than raw parallelism -- six independent agents touching the same files creates chaos regardless of how fast they work.
+
+Agent teams work without external tooling, but syncing tasks to Jira (or a similar tracker) adds external visibility and a feedback loop. Agent tasks already have the shape of tickets -- summary, description, status, owner, dependencies -- so the mapping is natural. The project owner can direct work through Jira comments without needing to be in the same terminal session.
+
+See the [agent-teams/](agent-teams/) directory for activation, team structure patterns, and optional Jira integration.
+
 ## Hybrid Approaches as Default
 
 The article's conclusion predicted hybrid approaches:
@@ -91,8 +103,9 @@ This prediction held, though the specific hybrid that emerged is simpler than an
 1. **Cascading CLAUDE.md** provides the backbone (global > project > subdirectory)
 2. **Context directory** provides depth where needed (architecture decisions, business requirements)
 3. **Agents** handle recurring workflows with persistent state
-4. **Skills** handle recurring single-step operations
-5. **Hooks** enforce rules that context files can only declare
+4. **Agent teams** coordinate parallel work across ownership boundaries
+5. **Skills** handle recurring single-step operations
+6. **Hooks** enforce rules that context files can only declare
 
 Most practitioners don't use all of these. A solo developer might use only cascading CLAUDE.md files. A team might add a context directory. An organization might add agents and hooks. The pattern scales with complexity rather than requiring full adoption up front.
 
@@ -103,6 +116,8 @@ Most practitioners don't use all of these. A solo developer might use only casca
 **The article underestimated how quickly cascading files would become standard.** The hierarchical override pattern wasn't presented as the central organizing principle, but that's what it became. Global > project > subdirectory is now the first thing practitioners set up.
 
 **The article didn't anticipate stateful agents.** The discussion focused on static context (documentation for AI to read). The emergence of agents with persistent state and autonomous actions was a meaningful evolution that changed what's possible with context engineering.
+
+**The article didn't anticipate multi-agent coordination.** Individual agents were a step beyond context files; agent teams were a step beyond that. The idea that multiple AI agents could work in parallel with clear ownership boundaries, shared contracts, and phased development wasn't on the radar. Neither was the natural mapping between internal agent tasks and external project trackers like Jira.
 
 ## Key Takeaways
 
