@@ -13,6 +13,7 @@ A public companion repo to [Rethinking Team Topologies for AI-Augmented Developm
 - `cascading-files-examples/` -- Global, project, and subdirectory cascading examples
 - `agents/` -- Agent-as-workflow pattern with two example agents and shared config
 - `agent-teams/` -- Multi-agent teams with optional Jira integration (activation, team structure, phases, templates)
+- `.claude-example/` -- Working skills and hooks configuration (copy to `.claude/`)
 - `evolution.md` -- What changed since the June 2025 article
 
 ## Standards
@@ -33,6 +34,7 @@ Read different files depending on the task:
 - Understanding what changed since the article: `evolution.md`
 - Understanding cross-agent coordination: `agents/README.md` and `agents/shared-config.json`
 - Setting up agent teams with Jira: `agent-teams/README.md`
+- Setting up skills and hooks: `.claude-example/README.md`
 
 ## File Format Convention
 

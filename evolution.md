@@ -62,6 +62,8 @@ Skills differ from agents in scope and statefulness. A skill is a single operati
 
 The practical impact is that recurring single-step tasks that used to require re-explaining the process each session can now be invoked by name with consistent behavior.
 
+The SKILL.md format became a cross-platform standard in December 2025, working with Claude Code, Codex CLI, and ChatGPT. In Claude Code, legacy `.claude/commands/` files still work but `.claude/skills/` is the current path. See `.claude-example/skills/` for working examples.
+
 ## MCP Servers
 
 Model Context Protocol (MCP) servers gave AI assistants native access to external services:

@@ -1,0 +1,33 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/boundary-guard.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/lint-markdown.sh",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "bash -c 'INPUT=$(cat); FILE_PATH=$(echo \"$INPUT\" | jq -r \".tool_input.file_path // empty\"); [[ -z \"$FILE_PATH\" ]] && exit 0; REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null); [[ -z \"$REPO_ROOT\" ]] && exit 0; [[ ! -L \"$REPO_ROOT/CLAUDE.md\" ]] && echo \"CLAUDE.md is not a symlink. Run: ln -s AGENTS.md CLAUDE.md\" >&2; exit 0'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

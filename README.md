@@ -14,6 +14,8 @@ What you get: four levels of context architecture (single file, context director
 
 **Running multi-agent workflows?** See [agents/](agents/) for structured workflows and [agent-teams/](agent-teams/) for parallel coordination with optional Jira integration.
 
+**Want to automate and enforce your context files?** Copy `.claude-example/` for working skills and hooks. See [.claude-example/README.md](.claude-example/README.md).
+
 ## What's Here
 
 ```text
@@ -54,6 +56,16 @@ context-engineering/
 │   ├── jira-setup.md              # One-time Jira configuration (optional)
 │   ├── agents-md-jira-section.md  # AGENTS.md template for Jira sync protocol (optional)
 │   └── team-structure.md          # AGENT_TEAMS.md template for team composition
+├── .claude-example/                    # Working Claude Code config (copy to .claude/)
+│   ├── README.md                       # Setup, skills overview, hook documentation
+│   ├── skills/                         # SKILL.md examples (vendor-neutral standard)
+│   │   ├── onboard/SKILL.md           # Context structure discovery
+│   │   ├── context-align/SKILL.md     # Drift detection across context sources
+│   │   └── scope-check/SKILL.md       # Pre-task boundary validation
+│   ├── hooks/
+│   │   ├── boundary-guard.sh          # Pre-tool file protection script
+│   │   └── lint-markdown.sh           # Post-tool markdown linting
+│   └── settings.json                  # Hook configurations
 └── evolution.md                   # How context engineering evolved since June 2025
 ```
 
@@ -71,13 +83,15 @@ This isn't a spectrum with a right answer. It's a function of your project's com
 
 **Use agent teams** when the work is large enough to split across parallel tracks. Agent teams build on the same foundation as individual agents but add multi-agent coordination: ownership boundaries, shared interface contracts, and phased development. Optionally, sync agent progress to Jira for external visibility and bidirectional feedback.
 
+**Add skills and hooks** when you want to automate workflows that consume your context files and enforce the boundaries they declare. Skills are user-invoked (discover context structure, check for drift, validate boundaries before starting). Hooks run automatically (block edits to protected files, verify symlink integrity). SKILL.md is a vendor-neutral standard, like AGENTS.md. See [.claude-example/](.claude-example/) for a ready-to-copy configuration.
+
 ## Key Principles
 
 These patterns work regardless of which AI coding tool you use. They emerged from daily use across a productivity workspace, multiple side projects, consulting engagements, and a job search.
 
 **Context is for both humans and AI.** If only the AI reads it, it'll drift from reality. If only humans read it, you'll spend time re-explaining things every session. Write for both audiences -- and you'll catch drift faster because humans review the same file.
 
-**Boundaries matter more than instructions.** Telling an AI what NOT to do (don't modify templates without approval, don't push to main, don't add features beyond what was asked) prevents more problems than telling it what to do. Hard-won lessons belong in context files -- each boundary is a bug you won't hit again.
+**Boundaries matter more than instructions.** Telling an AI what NOT to do (don't modify templates without approval, don't push to main, don't add features beyond what was asked) prevents more problems than telling it what to do. Hard-won lessons belong in context files -- each boundary is a bug you won't hit again. Enforced boundaries matter even more. A pre-tool hook can actually block edits to files your AGENTS.md marks as protected. See [.claude-example/](.claude-example/) for how declarative and imperative layers work together.
 
 **State is not context.** Context files describe *how* to work. State files describe *where you are*. Keep them separate. An agent's workflow instructions (`agent.md`) shouldn't contain today's pipeline status (`state.json`). Mixing them means every session update pollutes your process documentation.
 
@@ -107,6 +121,8 @@ ln -s AGENTS.md CLAUDE.md
 This repo uses the same convention -- `CLAUDE.md` is a symlink to `AGENTS.md`.
 
 **For other tools:** Check your tool's documentation for its context file convention. If it reads a different filename, symlink from AGENTS.md to that name. One source of truth, multiple entry points.
+
+**Skills and hooks:** The `.claude-example/` directory demonstrates skills (SKILL.md, a vendor-neutral standard) and hooks (Claude Code configuration). The skill patterns and hook logic transfer to any tool with equivalent features. File paths and `settings.json` format are Claude Code-specific.
 
 ## Background
 
