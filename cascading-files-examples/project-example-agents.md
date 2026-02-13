@@ -1,6 +1,6 @@
 # Project AGENTS.md Example
 
-This file lives at the repository root and describes everything specific to this project. If your tool uses `CLAUDE.md`, symlink it: `ln -s AGENTS.md CLAUDE.md`.
+This file lives at the repository root as `AGENTS.md` (with `CLAUDE.md` symlinked to it for Claude Code) and describes everything specific to this project.
 
 ---
 

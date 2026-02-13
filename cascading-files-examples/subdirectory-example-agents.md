@@ -1,6 +1,6 @@
 # Subdirectory AGENTS.md Example
 
-This file lives inside a specific directory (e.g., `src/api/AGENTS.md`) and provides specialized context for that area of the codebase.
+This file lives inside a specific directory as `AGENTS.md` (e.g., `src/api/AGENTS.md`, with `CLAUDE.md` symlinked to it for Claude Code) and provides specialized context for that area of the codebase.
 
 ---
 

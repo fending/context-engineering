@@ -35,9 +35,9 @@ context-engineering/
 │       └── working-style-guide.md
 ├── cascading-files-examples/            # Cascading context (global > project > subdirectory)
 │   ├── README.md
-│   ├── global-claude.md           # User-level defaults (~/.claude/CLAUDE.md)
-│   ├── project-claude.md          # Project-level (repo root AGENTS.md)
-│   └── subdirectory-claude.md     # Subdirectory override
+│   ├── global-example-agents.md   # Example: user-level defaults
+│   ├── project-example-agents.md  # Example: project-level context
+│   └── subdirectory-example-agents.md  # Example: subdirectory override
 ├── agents/                        # Agent-as-workflow pattern
 │   ├── README.md
 │   ├── shared-config.json         # Cross-agent settings (services, directories, dependencies)

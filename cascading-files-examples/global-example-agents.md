@@ -1,6 +1,6 @@
 # Global Context File Example
 
-This file lives at `~/.claude/CLAUDE.md` (or equivalent path for your tool) and applies to every project you open.
+This file lives at `~/.claude/CLAUDE.md` (or `AGENTS.md` with `CLAUDE.md` symlinked to it). Your tool may have an equivalent path, and this applies to every project you open there.
 
 ---
 
