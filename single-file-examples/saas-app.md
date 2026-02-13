@@ -1,11 +1,11 @@
-# CLAUDE.md (SaaS Application)
+# AGENTS.md (SaaS Application)
 
-A full single-file context for a SaaS product. Placeholder sections use `[brackets]` for content you'd replace with your own specifics.
+A full single-file context for a SaaS product. If your tool uses `CLAUDE.md`, symlink it: `ln -s AGENTS.md CLAUDE.md`. Placeholder sections use `[brackets]` for content you'd replace with your own specifics.
 
 ---
 
 ````markdown
-# CLAUDE.md
+# AGENTS.md
 
 ## Project Overview
 

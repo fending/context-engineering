@@ -1,4 +1,4 @@
-# Single CLAUDE.md File Approach
+# Single-File Approach
 
 Four examples of single-file context at different levels of project complexity:
 
@@ -9,6 +9,6 @@ Four examples of single-file context at different levels of project complexity:
 
 Each file shows the structure and explains what belongs in each section. Copy the one closest to your project and fill in your specifics.
 
-*Note that you'll need to copy the middle section of the file enclosed in "````", saved as your CLAUDE.md.*
+*Note that you'll need to copy the middle section of the file enclosed in "````", saved as your AGENTS.md (or CLAUDE.md for Claude Code).*
 
 For guidance on when to graduate from a single file to a context directory or cascading pattern, see the [main README](../README.md#which-approach-should-you-use).

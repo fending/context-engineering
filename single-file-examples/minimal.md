@@ -1,11 +1,11 @@
-# CLAUDE.md (Minimal)
+# AGENTS.md (Minimal)
 
-The smallest useful context file. Copy this, fill in the blanks, and you're operational.
+The smallest useful context file. If your tool uses `CLAUDE.md`, symlink it: `ln -s AGENTS.md CLAUDE.md`. Copy this, fill in the blanks, and you're operational.
 
 ---
 
 ````markdown
-# CLAUDE.md
+# AGENTS.md
 
 ## What This Project Does
 

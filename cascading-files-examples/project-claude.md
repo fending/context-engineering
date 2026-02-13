@@ -1,11 +1,11 @@
-# Project CLAUDE.md Example
+# Project AGENTS.md Example
 
-This file lives at the repository root and describes everything specific to this project.
+This file lives at the repository root and describes everything specific to this project. If your tool uses `CLAUDE.md`, symlink it: `ln -s AGENTS.md CLAUDE.md`.
 
 ---
 
 ````markdown
-# CLAUDE.md
+# AGENTS.md
 
 ## Repository Purpose
 
@@ -66,4 +66,4 @@ Do NOT:
 
 **The "Boundaries" section is the most important part.** Specific rules about what not to do prevent more problems than general guidance about what to do. Every item in this section should trace back to something that actually went wrong or that's genuinely fragile.
 
-**Reference to context directory is optional.** The article discussed single-file vs. context-directory as separate approaches. In practice, the project CLAUDE.md often serves as the entry point that references deeper context when it exists. This is the hybrid approach the article predicted.
+**Reference to context directory is optional.** The article discussed single-file vs. context-directory as separate approaches. In practice, the project AGENTS.md often serves as the entry point that references deeper context when it exists. This is the hybrid approach the article predicted.

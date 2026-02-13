@@ -1,11 +1,11 @@
-# CLAUDE.md (CLI Tool)
+# AGENTS.md (CLI Tool)
 
-A single-file context for a command-line tool. CLI projects have distinct context needs: argument parsing, output formatting, exit codes, and cross-platform behavior.
+A single-file context for a command-line tool. If your tool uses `CLAUDE.md`, symlink it: `ln -s AGENTS.md CLAUDE.md`. CLI projects have distinct context needs: argument parsing, output formatting, exit codes, and cross-platform behavior.
 
 ---
 
 ````markdown
-# CLAUDE.md
+# AGENTS.md
 
 ## What This Tool Does
 

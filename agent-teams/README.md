@@ -87,9 +87,9 @@ One-time Jira configuration: API token, custom fields, screen setup, and validat
 
 ### The Sync Protocol
 
-The sync protocol defines how agent teammates interact with Jira. It belongs in your project's CLAUDE.md so every agent reads it automatically.
+The sync protocol defines how agent teammates interact with Jira. It belongs in your project's AGENTS.md (or CLAUDE.md) so every agent reads it automatically.
 
-See [claude-md-jira-section.md](claude-md-jira-section.md) for a complete template.
+See [agents-md-jira-section.md](agents-md-jira-section.md) for a complete template.
 
 The protocol covers five operations:
 
@@ -117,5 +117,5 @@ Keep team labels generic. Don't name them after the product -- name them after t
 ## Files in This Directory
 
 - **[jira-setup.md](jira-setup.md)** -- One-time Jira configuration: API token, custom fields, screen setup, validation.
-- **[claude-md-jira-section.md](claude-md-jira-section.md)** -- Template for the Jira integration section of your CLAUDE.md. Copy into your project's CLAUDE.md and fill in the bracketed values.
+- **[agents-md-jira-section.md](agents-md-jira-section.md)** -- Template for the Jira integration section of your AGENTS.md (or CLAUDE.md). Copy into your project's context file and fill in the bracketed values.
 - **[team-structure.md](team-structure.md)** -- Template for an AGENT_TEAMS.md file that defines team composition, ownership boundaries, integration contracts, and the prompt used to start the parallel build.

@@ -1,11 +1,11 @@
-# Subdirectory CLAUDE.md Example
+# Subdirectory AGENTS.md Example
 
-This file lives inside a specific directory (e.g., `src/api/CLAUDE.md`) and provides specialized context for that area of the codebase.
+This file lives inside a specific directory (e.g., `src/api/AGENTS.md`) and provides specialized context for that area of the codebase.
 
 ---
 
 ````markdown
-# CLAUDE.md (API Layer)
+# AGENTS.md (API Layer)
 
 ## Purpose
 
@@ -63,8 +63,8 @@ async def create_resource(
 
 ## Notes
 
-**Only create subdirectory context when the area has genuinely different rules.** If `src/api/` follows the same conventions as the rest of the project, a subdirectory CLAUDE.md adds noise without value.
+**Only create subdirectory context when the area has genuinely different rules.** If `src/api/` follows the same conventions as the rest of the project, a subdirectory AGENTS.md adds noise without value.
 
 **Code examples are high-value here.** Showing the expected handler pattern (with a real code snippet) is more effective than describing it in prose. The AI will pattern-match on the example.
 
-**These files should be small.** 30-50 lines is typical. If a subdirectory CLAUDE.md is approaching the size of the project-level file, something is wrong -- either the project file is too sparse or the subdirectory file is duplicating content.
+**These files should be small.** 30-50 lines is typical. If a subdirectory AGENTS.md is approaching the size of the project-level file, something is wrong -- either the project file is too sparse or the subdirectory file is duplicating content.

@@ -89,7 +89,7 @@ Agents are overkill when:
 
 - The task is a one-off
 - There's no persistent state to track
-- The workflow fits in a CLAUDE.md section
+- The workflow fits in an AGENTS.md section
 
 ## Examples
 

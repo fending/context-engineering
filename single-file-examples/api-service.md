@@ -1,11 +1,11 @@
-# CLAUDE.md (API Service)
+# AGENTS.md (API Service)
 
-A single-file context for a backend API. API services have specific context needs: endpoint conventions, auth middleware, data validation patterns, and integration points.
+A single-file context for a backend API. If your tool uses `CLAUDE.md`, symlink it: `ln -s AGENTS.md CLAUDE.md`. API services have specific context needs: endpoint conventions, auth middleware, data validation patterns, and integration points.
 
 ---
 
 ````markdown
-# CLAUDE.md
+# AGENTS.md
 
 ## Service Overview
 

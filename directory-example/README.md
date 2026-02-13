@@ -4,7 +4,7 @@ The context directory pattern separates concerns into individual files that can 
 
 ## When to Use This
 
-- Your single CLAUDE.md has grown past ~150 lines and is hard to scan
+- Your single context file has grown past ~150 lines and is hard to scan
 - Different sections change at different rates (architecture: rarely; style guide: often)
 - Multiple people contribute to different aspects of the context
 - You need to serve both AI assistants and human stakeholders with different levels of detail
@@ -24,10 +24,10 @@ context/
 
 ## How AI Assistants Consume This
 
-Most AI coding assistants (Claude Code, Cursor, etc.) will read the project's root CLAUDE.md or equivalent. That file should reference the context directory:
+Most AI coding assistants (Claude Code, Cursor, etc.) will read the project's root AGENTS.md (or CLAUDE.md for Claude Code). That file should reference the context directory:
 
 ```markdown
-# CLAUDE.md
+# AGENTS.md
 
 ## Context
 

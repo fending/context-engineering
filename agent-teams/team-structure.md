@@ -106,7 +106,7 @@ These interfaces should be defined in `[shared types directory]` early in Phase 
 
 ## Jira Integration
 
-See `CLAUDE.md` for the full sync protocol. Summary:
+See `AGENTS.md` for the full sync protocol. Summary:
 
 - All tasks create corresponding [PROJECT_KEY] tickets
 - Comments on Jira tickets for progress and feedback
@@ -126,7 +126,7 @@ Create an agent team called "{project}-build" for Phase 1A development.
 
 Read context/AGENT_TEAMS.md for the full team structure, integration
 contracts, and Jira sync protocol. Read [product requirements doc] for
-product requirements. Read CLAUDE.md for conventions and Jira integration.
+product requirements. Read AGENTS.md for conventions and Jira integration.
 
 Spawn two sub-teams:
 - Team Experience (3 teammates): [Role A], [Role B], [Role C]
@@ -135,7 +135,7 @@ Spawn two sub-teams:
 Each teammate should:
 1. Read their assigned scope from AGENT_TEAMS.md
 2. Create Jira [PROJECT_KEY] tickets for their tasks with appropriate labels
-3. Follow the Jira sync protocol in CLAUDE.md
+3. Follow the Jira sync protocol in AGENTS.md
 4. Build against the shared interfaces
 5. Team Experience builds with typed stubs where APIs don't exist yet
 6. Team Engine builds against the decided schema

@@ -1,22 +1,37 @@
-# What Changed Since June 2025
+# How Context Engineering Evolved
 
 The original article ([Rethinking Team Topologies for AI-Augmented Development](https://brianfending.substack.com/p/rethinking-team-topologies-for-ai)) framed context engineering as a choice between two approaches: a single file (CLAUDE.md, AGENTS.md) vs. a context directory with separate documents for each concern.
 
-Eight months later, the landscape looks different. The single-file approach won the adoption race, but it evolved beyond what the article described. Here's what happened.
+Eight months later, the landscape looks different. The single-file approach won the adoption race, but it evolved in ways the article didn't anticipate -- cascading files became the organizing principle, a vendor-neutral standard emerged, and stateful agents changed what's possible. Here's what happened.
 
-## Cascading CLAUDE.md Became the Standard
+## Cascading Context Files Became the Standard
 
 The article described hierarchical override as a feature of the single-file approach: root-level guidance provides defaults, subdirectory files offer overrides. This pattern has since become the dominant organizing principle for context engineering.
 
 The three-level cascade is now standard:
 
 1. **Global** (`~/.claude/CLAUDE.md`): Personal preferences, environment defaults, communication style
-2. **Project** (repo root `CLAUDE.md`): Stack, structure, architecture, boundaries
-3. **Subdirectory** (e.g., `src/api/CLAUDE.md`): Specialized rules for that area
+2. **Project** (repo root `AGENTS.md`): Stack, structure, architecture, boundaries
+3. **Subdirectory** (e.g., `src/api/AGENTS.md`): Specialized rules for that area
 
 This is the pattern most practitioners settle on. It's simple enough to understand immediately, flexible enough to handle multi-project workflows, and doesn't require any tooling to implement.
 
-The article's prediction that hybrid approaches would emerge was correct, but the hybrid looks different than expected. Rather than "single file OR context directory," most mature setups use cascading CLAUDE.md files as the backbone, with a context directory for depth when needed.
+The article's prediction that hybrid approaches would emerge was correct, but the hybrid looks different than expected. Rather than "single file OR context directory," most mature setups use cascading context files as the backbone, with a context directory for depth when needed.
+
+## AGENTS.md Emerged as the Vendor-Neutral Standard
+
+As context engineering spread beyond Claude Code to Cursor, Windsurf, Copilot, and other tools, a fragmentation problem emerged: each tool read its own filename. Claude Code read `CLAUDE.md`, Cursor read `.cursorrules`, and so on. Projects that wanted to work with multiple tools needed duplicate files with identical content.
+
+AGENTS.md solved this by establishing a single, vendor-neutral filename that any tool can adopt. The standard is stewarded by AAIF/Linux Foundation, and adoption crossed 60,000+ projects within months of its introduction. The convention is straightforward: author your context in `AGENTS.md`, then symlink tool-specific filenames to it.
+
+```bash
+ln -s AGENTS.md CLAUDE.md     # Claude Code
+ln -s AGENTS.md .cursorrules  # Cursor (if needed)
+```
+
+One source of truth, multiple entry points. The content doesn't change -- only the filename that each tool looks for.
+
+For this repository, all templates now output `AGENTS.md` as the primary filename. The symlink convention is documented in each template's intro text, and this repo's own context file follows the same pattern (`CLAUDE.md` symlinks to `AGENTS.md`).
 
 ## Hooks
 
@@ -100,18 +115,18 @@ The article's conclusion predicted hybrid approaches:
 
 This prediction held, though the specific hybrid that emerged is simpler than anticipated:
 
-1. **Cascading CLAUDE.md** provides the backbone (global > project > subdirectory)
+1. **Cascading AGENTS.md** provides the backbone (global > project > subdirectory)
 2. **Context directory** provides depth where needed (architecture decisions, business requirements)
 3. **Agents** handle recurring workflows with persistent state
 4. **Agent teams** coordinate parallel work across ownership boundaries
 5. **Skills** handle recurring single-step operations
 6. **Hooks** enforce rules that context files can only declare
 
-Most practitioners don't use all of these. A solo developer might use only cascading CLAUDE.md files. A team might add a context directory. An organization might add agents and hooks. The pattern scales with complexity rather than requiring full adoption up front.
+Most practitioners don't use all of these. A solo developer might use only cascading context files. A team might add a context directory. An organization might add agents and hooks. The pattern scales with complexity rather than requiring full adoption up front.
 
 ## What the Article Missed
 
-**The article framed single-file vs. context-directory as competing approaches.** In practice, they're complementary. The CLAUDE.md is the entry point; the context directory provides depth. Most setups that started with one evolved to include the other.
+**The article framed single-file vs. context-directory as competing approaches.** In practice, they're complementary. The AGENTS.md is the entry point; the context directory provides depth. Most setups that started with one evolved to include the other.
 
 **The article underestimated how quickly cascading files would become standard.** The hierarchical override pattern wasn't presented as the central organizing principle, but that's what it became. Global > project > subdirectory is now the first thing practitioners set up.
 

@@ -1,8 +1,8 @@
-# CLAUDE.md Jira Section Template
+# AGENTS.md Jira Section Template
 
-Template for the Jira integration section of your project's CLAUDE.md. This gives agent teammates everything they need to sync with Jira without runtime discovery.
+Template for the Jira integration section of your project's AGENTS.md (or CLAUDE.md). This gives agent teammates everything they need to sync with Jira without runtime discovery.
 
-Copy the fenced content below into your CLAUDE.md and replace the `[bracketed]` values.
+Copy the fenced content below into your AGENTS.md (or CLAUDE.md) and replace the `[bracketed]` values.
 
 ````markdown
 ## Jira Integration

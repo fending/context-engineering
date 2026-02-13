@@ -1,6 +1,6 @@
 # Cascading Context
 
-The cascading CLAUDE.md pattern applies the same concept as cascading stylesheets: global defaults, project-level overrides, and subdirectory-level specializations. More specific files take precedence over more general ones.
+The cascading context file pattern applies the same concept as cascading stylesheets: global defaults, project-level overrides, and subdirectory-level specializations. More specific files take precedence over more general ones.
 
 This pattern was described in the original article as a feature of the single-file approach. It has since become the de facto standard for organizing context across multiple projects and workspaces.
 
@@ -8,8 +8,8 @@ This pattern was described in the original article as a feature of the single-fi
 
 ```text
 ~/.claude/CLAUDE.md              # Global: user preferences, environment, defaults
-  └── project/CLAUDE.md          # Project: stack, structure, architecture, boundaries
-        └── project/src/api/CLAUDE.md   # Subdirectory: specialized rules for this area
+  └── project/AGENTS.md          # Project: stack, structure, architecture, boundaries
+        └── project/src/api/AGENTS.md   # Subdirectory: specialized rules for this area
 ```
 
 More specific files override more general ones. If the global file says "2-space indentation" but a project file says "4-space indentation," the project file wins for that project.
@@ -29,7 +29,7 @@ Things that are true across all your projects:
 
 See [global-claude.md](global-claude.md) for a working example.
 
-### Project (repo root CLAUDE.md)
+### Project (repo root AGENTS.md)
 
 Things that are true for this specific project:
 
@@ -42,7 +42,7 @@ Things that are true for this specific project:
 
 See [project-claude.md](project-claude.md) for a working example.
 
-### Subdirectory (e.g., src/api/CLAUDE.md)
+### Subdirectory (e.g., src/api/AGENTS.md)
 
 Things that are true only within this part of the codebase:
 
@@ -67,4 +67,4 @@ See [subdirectory-claude.md](subdirectory-claude.md) for a working example.
 
 **Contradictions without intent.** If your global says "always use TypeScript" but a project uses Python, that's fine -- the project file overrides. But document the override explicitly rather than hoping precedence handles it silently.
 
-**Subdirectory files that duplicate the project file.** Only create subdirectory context when that area genuinely has different rules. If `src/api/CLAUDE.md` just repeats the project-level coding standards, delete it.
+**Subdirectory files that duplicate the project file.** Only create subdirectory context when that area genuinely has different rules. If `src/api/AGENTS.md` just repeats the project-level coding standards, delete it.

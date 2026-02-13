@@ -1,6 +1,6 @@
-# Global CLAUDE.md Example
+# Global Context File Example
 
-This file lives at `~/.claude/CLAUDE.md` and applies to every project you open.
+This file lives at `~/.claude/CLAUDE.md` (or equivalent path for your tool) and applies to every project you open.
 
 ---
 
@@ -51,4 +51,4 @@ This file lives at `~/.claude/CLAUDE.md` and applies to every project you open.
 
 **Error handling philosophy is global.** "Diagnose failures, don't silently fall back" is a working preference, not a project-specific rule. It applies whether you're building a CLI tool or a SaaS app.
 
-**Project-level files override these defaults.** If a project uses Python with 4-space indentation, the project CLAUDE.md says so, and these global defaults yield for that project.
+**Project-level files override these defaults.** If a project uses Python with 4-space indentation, the project AGENTS.md (or CLAUDE.md) says so, and these global defaults yield for that project.

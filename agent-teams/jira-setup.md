@@ -17,7 +17,7 @@ JIRA_USERNAME=[your-email@example.com]
 JIRA_API_TOKEN=[your-api-token]
 ```
 
-These can live in a `.env.local` file that your CLAUDE.md references, or as shell environment variables.
+These can live in a `.env.local` file that your AGENTS.md (or CLAUDE.md) references, or as shell environment variables.
 
 ## Issue Types and Statuses
 
@@ -45,7 +45,7 @@ for t in json.load(sys.stdin)['transitions']:
     print(f\"{t['name']} (id: {t['id']}) -> {t['to']['name']}\")"
 ```
 
-Document these IDs in your CLAUDE.md so agents don't have to discover them at runtime.
+Document these IDs in your AGENTS.md so agents don't have to discover them at runtime.
 
 ## Custom Fields
 
@@ -81,7 +81,7 @@ curl -s -u "$JIRA_USERNAME:$JIRA_API_TOKEN" \
   }'
 ```
 
-Both commands return the field's `id` (e.g., `customfield_10157`). Save these -- you'll need them in your CLAUDE.md.
+Both commands return the field's `id` (e.g., `customfield_10157`). Save these -- you'll need them in your AGENTS.md (or CLAUDE.md).
 
 ## Adding Fields to Screens
 
