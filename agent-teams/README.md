@@ -91,6 +91,32 @@ The sync protocol defines how agent teammates interact with Jira. It belongs in 
 
 See [agents-md-jira-section.md](agents-md-jira-section.md) for a complete template.
 
+```mermaid
+sequenceDiagram
+    participant A as Agent Teammate
+    participant J as Jira API
+    participant O as Project Owner
+
+    A->>J: Create ticket (summary, labels, agent task ID)
+    A->>J: Read comments (pre-work check)
+    J-->>A: No comments yet
+
+    rect rgb(240, 240, 240)
+        Note over A,O: Work cycle (repeats per milestone)
+        A->>A: Build against shared interfaces
+        A->>J: Comment (progress update)
+        A->>J: Transition status (In Progress)
+        O->>J: Comment (direction / feedback)
+        A->>J: Read comments (checkpoint)
+        J-->>A: Owner feedback
+        A->>A: Adjust approach based on feedback
+    end
+
+    A->>J: Create issue links (dependencies)
+    A->>J: Log work (worklog API)
+    A->>J: Transition status (Done)
+```
+
 The protocol covers five operations:
 
 1. **Task creation** -- When an agent claims a task, it creates a corresponding Jira ticket with labels, custom fields, and a description that includes the agent task ID for cross-referencing.
