@@ -1,0 +1,13 @@
+{
+  "name": "context-engineering",
+  "owner": {
+    "name": "Brian Fending"
+  },
+  "plugins": [
+    {
+      "name": "context-setup",
+      "source": "./plugins/context-setup",
+      "description": "Scaffold and audit context engineering files (AGENTS.md, skills, hooks, cascading context)"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "context-setup",
+  "description": "Scaffold, audit, and upgrade context engineering files",
+  "version": "1.0.0",
+  "author": {
+    "name": "Brian Fending",
+    "url": "https://brianfending.com"
+  },
+  "repository": "https://github.com/fending/context-engineering",
+  "license": "MIT",
+  "keywords": ["context-engineering", "agents-md", "skills", "scaffolding"],
+  "claude_code": {
+    "min_version": "1.0.0"
+  }
+}
