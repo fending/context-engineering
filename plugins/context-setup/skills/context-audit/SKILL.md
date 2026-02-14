@@ -49,6 +49,7 @@ Check which required sections are present for the current context level.
 - Auth and permissions (if auth packages are present)
 - Data model (if database/ORM packages are present)
 - API conventions (if API routes or endpoints exist)
+- Integration map (if 2+ distinct service client packages are present in dependencies)
 
 **Cascading level requires:**
 
@@ -89,6 +90,7 @@ Check for common content problems:
 - **Stale framework references:** Tech stack mentions that don't match installed dependencies
 - **Missing symlink:** CLAUDE.md is a regular file instead of a symlink, or doesn't exist at all
 - **Overly long root file:** Project-root AGENTS.md exceeding ~150 lines (candidate for cascading)
+- **Missing integration map:** Project has 2+ distinct service client packages (e.g., Supabase + Jira client, Prisma + Stripe SDK) but no integration map or equivalent domain-to-service mapping. Without this, agents default to the dominant persistence layer for new work, ignoring TODO comments or type hints that indicate a different backing service.
 
 ## Report Format
 

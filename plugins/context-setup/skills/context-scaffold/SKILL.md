@@ -16,10 +16,11 @@ Analyze your project and generate the right context files pre-populated with wha
    - Check for existing context files: `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, `context/` directory
    - Check for `.claude/` directory (existing skills, hooks, settings)
    - Identify testing setup: test runner config, test directories, test scripts
+   - Detect multiple backing services: count distinct service client packages (e.g., supabase + jira, prisma + stripe, aws-sdk + firebase). If 2+ detected, flag for Integration Map section.
 
 2. **Determine complexity level.** Present a recommendation with rationale, let the user choose:
    - **Minimal** (~40 lines): Solo project, single language, straightforward structure. One deployment target, no auth layer, no multi-service architecture.
-   - **Full single file** (~100-120 lines): Multi-layer app (frontend + backend), auth system, database, API with conventions worth documenting. Still a single deployable unit.
+   - **Full single file** (~100-120 lines): Multi-layer app (frontend + backend), auth system, database, API with conventions worth documenting. Multiple backing services (database + external APIs). Still a single deployable unit.
    - **Cascading + context directory**: Multiple projects or workspaces, team environment, complex architecture with distinct subsystems. Or a single project large enough that a single file would exceed ~150 lines.
 
 3. **Generate files** based on the chosen level (templates below).
@@ -108,6 +109,21 @@ Generate a single `AGENTS.md` with all minimal sections plus the following. Popu
 
 [If not detected:]
 [Describe your API conventions -- URL structure, request/response format, error handling pattern, versioning approach.]
+
+## Integration Map
+
+[Generate this section when 2+ distinct service client packages are detected. If only one backing service exists, skip this section -- there's no ambiguity to resolve.]
+
+[Scan dependencies for service client packages and map them to the domains they serve. Format as a table:]
+
+| Domain | Backing Service | Client | Notes |
+| --- | --- | --- | --- |
+| [domain area] | [service name] | [client file/module path] | [brief note] |
+
+[If a domain's backing service can't be determined from dependencies alone:]
+[Map each functional domain to its backing service -- which API or database handles it, where the client code lives, and any relevant notes.]
+
+Not every route goes through the default database. Before creating a new API route or data layer, check this table. If the domain isn't listed, ask before defaulting to [detected primary service].
 ```
 
 ### Cascading + Context Directory
