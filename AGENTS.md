@@ -4,7 +4,7 @@ This is the context file for *this* repository -- the one about context engineer
 
 ## What This Project Is
 
-A public companion repo to [Rethinking Team Topologies for AI-Augmented Development](https://brianfending.substack.com/p/rethinking-team-topologies-for-ai). Working examples of context file structures (single-file, context directory, cascading, agents) plus an installable plugin that scaffolds, audits, and upgrades context files from project analysis. Patterns you understand, automation you install.
+A public companion repo to [Rethinking Team Topologies for AI-Augmented Development](https://brianfending.substack.com/p/rethinking-team-topologies-for-ai). Working examples of context file structures (single-file, context directory, cascading, agents) plus an installable plugin that scaffolds, audits, aligns, and upgrades context files from project analysis. Patterns you understand, automation you install.
 
 ## Structure
 
@@ -14,7 +14,7 @@ A public companion repo to [Rethinking Team Topologies for AI-Augmented Developm
 - `agents/` -- Agent-as-workflow pattern with two example agents and shared config
 - `agent-teams/` -- Multi-agent teams with optional Jira integration (activation, team structure, phases, templates)
 - `.claude-example/` -- Working skills and hooks configuration (copy to `.claude/`)
-- `plugins/context-setup/` -- Installable Claude Code plugin (scaffold, audit, upgrade context files)
+- `plugins/context-setup/` -- Installable Claude Code plugin (scaffold, audit, align, upgrade context files)
 - `evolution.md` -- What changed since the June 2025 article
 
 ## Standards

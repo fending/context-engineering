@@ -1,6 +1,6 @@
 {
   "name": "context-setup",
-  "description": "Scaffold, audit, and upgrade context engineering files",
+  "description": "Scaffold, audit, align, and upgrade context engineering files",
   "version": "1.0.0",
   "author": {
     "name": "Brian Fending",

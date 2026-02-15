@@ -191,7 +191,7 @@ After generation:
 
 ## Notes
 
-This skill generates context files; it doesn't maintain them. After generating, use `/context-align` (from `.claude-example/` skills) periodically to check for drift between context files and the codebase.
+This skill generates context files; it doesn't maintain them. After generating, use `/context-setup:context-align` periodically to check for drift between context files and the codebase.
 
 The complexity recommendation is a starting point, not a rule. A small project with unusual architecture might benefit from the full template. A large project with simple patterns might only need the minimal one. The recommendation is based on heuristics (directory count, dependency count, presence of auth/database layers), but the user makes the final call.
 

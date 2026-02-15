@@ -145,7 +145,7 @@ Order recommendations by impact: structural issues and missing sections first, f
 ## How This Differs from Other Skills
 
 - **context-audit** (this skill) checks structure and completeness -- is your context well-formed?
-- **context-align** (`.claude-example/` skill) checks accuracy -- does your context match your code?
+- **context-align** (this plugin) checks accuracy -- does your context match your code?
 - **onboard** (`.claude-example/` skill) discovers and summarizes -- what context exists?
 - **scope-check** (`.claude-example/` skill) validates tasks against boundaries -- can I do this?
 

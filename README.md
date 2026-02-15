@@ -1,6 +1,6 @@
 # Context Engineering
 
-Reusable patterns for structuring the context that AI coding assistants consume. Copy a template, fill in your specifics, ship better code with less re-explaining. Claude Code users can install the [context-setup plugin](plugins/context-setup/) to generate, audit, and upgrade these files automatically.
+Reusable patterns for structuring the context that AI coding assistants consume. Copy a template, fill in your specifics, ship better code with less re-explaining. Claude Code users can install the [context-setup plugin](plugins/context-setup/) to generate, audit, align, and upgrade these files automatically.
 
 What you get: four levels of context architecture (single file, context directory, cascading files, agents & agent teams with optional Jira sync) with working templates at each level. Every file is designed to be copied and adapted, and generic placeholders describe the *kind* of content that belongs there rather than inventing fictional examples.
 
@@ -14,7 +14,7 @@ What you get: four levels of context architecture (single file, context director
 
 **Running multi-agent workflows?** See [agents/](agents/) for structured workflows and [agent-teams/](agent-teams/) for parallel coordination with optional Jira integration.
 
-**Want to automate and enforce your context files?** Copy `.claude-example/` for working skills and hooks. See [.claude-example/README.md](.claude-example/README.md). Claude Code users can also install the [context-setup plugin](plugins/context-setup/) to scaffold, audit, and upgrade context files from project analysis.
+**Want to automate and enforce your context files?** Copy `.claude-example/` for working skills and hooks. See [.claude-example/README.md](.claude-example/README.md). Claude Code users can also install the [context-setup plugin](plugins/context-setup/) to scaffold, audit, align, and upgrade context files from project analysis.
 
 ## What's Here
 
@@ -67,11 +67,12 @@ context-engineering/
 │   │   └── lint-markdown.sh           # Post-tool markdown linting
 │   └── settings.json                  # Hook configurations
 ├── plugins/                            # Installable plugin (generates and maintains context)
-│   └── context-setup/                  # Scaffold, audit, and upgrade context files
+│   └── context-setup/                  # Scaffold, audit, align, and upgrade context files
 │       ├── README.md
 │       └── skills/
 │           ├── context-scaffold/SKILL.md   # Generate context files from project analysis
 │           ├── context-audit/SKILL.md      # Evaluate structure and completeness
+│           ├── context-align/SKILL.md      # Drift detection against actual codebase
 │           └── context-upgrade/SKILL.md    # Transition between complexity levels
 └── evolution.md                   # How context engineering evolved since June 2025
 ```
@@ -127,14 +128,14 @@ ln -s AGENTS.md CLAUDE.md
 
 This repo uses the same convention -- `CLAUDE.md` is a symlink to `AGENTS.md`.
 
-To install the context-setup plugin (scaffold, audit, and upgrade context files from project analysis):
+To install the context-setup plugin (scaffold, audit, align, and upgrade context files from project analysis):
 
 ```bash
 /plugin marketplace add fending/context-engineering
 /plugin install context-setup@context-engineering
 ```
 
-To add the operational skills and hooks (onboard, context-align, scope-check, boundary-guard):
+To add the remaining operational skills and hooks (onboard, scope-check, boundary-guard):
 
 ```bash
 cp -r .claude-example/ .claude/
