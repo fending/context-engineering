@@ -4,7 +4,7 @@ This is the context file for *this* repository -- the one about context engineer
 
 ## What This Project Is
 
-A public companion repo to [Rethinking Team Topologies for AI-Augmented Development](https://brianfending.substack.com/p/rethinking-team-topologies-for-ai). Contains working examples of context file structures (single-file, context directory, cascading, agents) for AI-augmented development. Documentation only -- no application code.
+A public companion repo to [Rethinking Team Topologies for AI-Augmented Development](https://brianfending.substack.com/p/rethinking-team-topologies-for-ai). Working examples of context file structures (single-file, context directory, cascading, agents) plus an installable plugin that scaffolds, audits, and upgrades context files from project analysis. Patterns you understand, automation you install.
 
 ## Structure
 
@@ -14,6 +14,7 @@ A public companion repo to [Rethinking Team Topologies for AI-Augmented Developm
 - `agents/` -- Agent-as-workflow pattern with two example agents and shared config
 - `agent-teams/` -- Multi-agent teams with optional Jira integration (activation, team structure, phases, templates)
 - `.claude-example/` -- Working skills and hooks configuration (copy to `.claude/`)
+- `plugins/context-setup/` -- Installable Claude Code plugin (scaffold, audit, upgrade context files)
 - `evolution.md` -- What changed since the June 2025 article
 
 ## Standards
@@ -35,6 +36,7 @@ Read different files depending on the task:
 - Understanding cross-agent coordination: `agents/README.md` and `agents/shared-config.json`
 - Setting up agent teams with Jira: `agent-teams/README.md`
 - Setting up skills and hooks: `.claude-example/README.md`
+- Working on the context-setup plugin: `plugins/context-setup/README.md` and the SKILL.md files in its `skills/` subdirectories
 
 ## File Format Convention
 
