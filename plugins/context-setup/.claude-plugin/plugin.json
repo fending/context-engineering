@@ -8,8 +8,5 @@
   },
   "repository": "https://github.com/fending/context-engineering",
   "license": "MIT",
-  "keywords": ["context-engineering", "agents-md", "skills", "scaffolding"],
-  "claude_code": {
-    "min_version": "1.0.0"
-  }
+  "keywords": ["context-engineering", "agents-md", "skills", "scaffolding"]
 }
