@@ -1,8 +1,8 @@
 # Context Engineering
 
-Reusable patterns for structuring the context that AI coding assistants consume. Copy a template, fill in your specifics, ship better code with less re-explaining.
+Reusable patterns for structuring the context that AI coding assistants consume. Copy a template, fill in your specifics, ship better code with less re-explaining. Claude Code users can install the [context-setup plugin](plugins/context-setup/) to generate, audit, and upgrade these files automatically.
 
-What you get: four levels of context architecture (single file, context directory, cascading files, agents) with working templates at each level. Every file is designed to be copied and adapted -- generic placeholders describe the *kind* of content that belongs there rather than inventing fictional examples.
+What you get: four levels of context architecture (single file, context directory, cascading files, agents & agent teams with optional Jira sync) with working templates at each level. Every file is designed to be copied and adapted, and generic placeholders describe the *kind* of content that belongs there rather than inventing fictional examples.
 
 ## Start Here
 
