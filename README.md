@@ -14,7 +14,7 @@ What you get: four levels of context architecture (single file, context director
 
 **Running multi-agent workflows?** See [agents/](agents/) for structured workflows and [agent-teams/](agent-teams/) for parallel coordination with optional Jira integration.
 
-**Want to automate and enforce your context files?** Copy `.claude-example/` for working skills and hooks. See [.claude-example/README.md](.claude-example/README.md).
+**Want to automate and enforce your context files?** Copy `.claude-example/` for working skills and hooks. See [.claude-example/README.md](.claude-example/README.md). Claude Code users can also install the [context-setup plugin](plugins/context-setup/) to scaffold, audit, and upgrade context files from project analysis.
 
 ## What's Here
 
@@ -66,6 +66,13 @@ context-engineering/
 │   │   ├── boundary-guard.sh          # Pre-tool file protection script
 │   │   └── lint-markdown.sh           # Post-tool markdown linting
 │   └── settings.json                  # Hook configurations
+├── plugins/                            # Installable plugin (generates and maintains context)
+│   └── context-setup/                  # Scaffold, audit, and upgrade context files
+│       ├── README.md
+│       └── skills/
+│           ├── context-scaffold/SKILL.md   # Generate context files from project analysis
+│           ├── context-audit/SKILL.md      # Evaluate structure and completeness
+│           └── context-upgrade/SKILL.md    # Transition between complexity levels
 └── evolution.md                   # How context engineering evolved since June 2025
 ```
 
@@ -95,7 +102,7 @@ These patterns work regardless of which AI coding tool you use. They emerged fro
 
 **State is not context.** Context files describe *how* to work. State files describe *where you are*. Keep them separate. An agent's workflow instructions (`agent.md`) shouldn't contain today's pipeline status (`state.json`). Mixing them means every session update pollutes your process documentation.
 
-**Review your context files.** They rot. Architecture decisions change, team norms evolve, tools get replaced. If your context file references a library you deprecated six months ago, it's actively misleading every AI session that reads it.
+**Review your context files.** They rot. Architecture decisions change, team norms evolve, tools get replaced. If your context file references a library you deprecated six months ago, it's actively misleading every AI session that reads it. Run `/context-align` after dependency upgrades, major refactors, or monthly as a hygiene check. It cross-references your context files against your actual codebase and flags what's drifted.
 
 **Hybrid is the natural end state.** Most mature setups end up with a combination: an AGENTS.md for quick orientation, a context directory for depth, cascading files for cross-project consistency, and agents for recurring workflows. Start simple, add layers when the pain justifies them.
 
@@ -104,7 +111,7 @@ These patterns work regardless of which AI coding tool you use. They emerged fro
 Every file in this repo is designed to be copied and adapted. Where examples need specifics, they use generic placeholders and describe the *kind* of content that belongs there rather than inventing fictional companies or products. The structures and patterns are drawn from real use.
 
 1. Pick the approach that matches your current project complexity
-2. Copy the relevant files into your project
+2. Copy the relevant files into your project -- or if you use Claude Code, run `/context-setup:scaffold` to generate them pre-populated from your project's dependencies, directory structure, and config files
 3. Replace the placeholder content with your own
 4. Iterate -- context engineering is ongoing, not a one-time setup
 
@@ -119,6 +126,19 @@ ln -s AGENTS.md CLAUDE.md
 ```
 
 This repo uses the same convention -- `CLAUDE.md` is a symlink to `AGENTS.md`.
+
+To install the context-setup plugin (scaffold, audit, and upgrade context files from project analysis):
+
+```bash
+/plugin marketplace add fending/context-engineering
+/plugin install context-setup@context-engineering
+```
+
+To add the operational skills and hooks (onboard, context-align, scope-check, boundary-guard):
+
+```bash
+cp -r .claude-example/ .claude/
+```
 
 **For other tools:** Check your tool's documentation for its context file convention. If it reads a different filename, symlink from AGENTS.md to that name. One source of truth, multiple entry points.
 
