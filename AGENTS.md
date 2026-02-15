@@ -35,8 +35,8 @@ Read different files depending on the task:
 - Understanding what changed since the article: `evolution.md`
 - Understanding cross-agent coordination: `agents/README.md` and `agents/shared-config.json`
 - Setting up agent teams with Jira: `agent-teams/README.md`
-- Setting up skills and hooks: `.claude-example/README.md`
-- Working on the context-setup plugin: `plugins/context-setup/README.md` and the SKILL.md files in its `skills/` subdirectories
+- Setting up skills and hooks via copy: `.claude-example/README.md`
+- Installing skills via plugin: `plugins/context-setup/README.md` and the SKILL.md files in its `skills/` subdirectories
 
 ## File Format Convention
 
