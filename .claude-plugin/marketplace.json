@@ -7,7 +7,7 @@
     {
       "name": "context-setup",
       "source": "./plugins/context-setup",
-      "description": "Scaffold and audit context engineering files (AGENTS.md, skills, hooks, cascading context)"
+      "description": "Scaffold, audit, align, and upgrade context engineering files (AGENTS.md, skills, hooks, cascading context)"
     }
   ]
 }

@@ -22,6 +22,7 @@ What you get: four levels of context architecture (single file, context director
 context-engineering/
 ├── AGENTS.md                      # Context file for this repo (CLAUDE.md symlinked)
 ├── single-file-examples/          # Single-file approach (AGENTS.md / CLAUDE.md)
+│   ├── README.md                  # When and why to use this pattern
 │   ├── minimal.md                 # Bare minimum that's still useful
 │   ├── saas-app.md                # SaaS product example
 │   ├── api-service.md             # Backend API example
