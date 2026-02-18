@@ -30,9 +30,17 @@ Reads all context sources and checks them against the filesystem and project con
    - Skills that reference tools or workflows that no longer exist
 
 5. **Cascading contradictions:**
-   - Rules in a subdirectory AGENTS.md that conflict with the project root AGENTS.md
-   - Global preferences that override project-level boundaries (or vice versa)
-   - Inconsistent technology references across levels
+
+   Find every AGENTS.md in the project tree (root, subdirectories, global if present). Compare what each level says about the same concern:
+
+   - Test runner (Vitest vs Jest vs Mocha, pytest vs unittest)
+   - Linter and formatter (ESLint vs Biome, Prettier vs project formatter)
+   - Package manager (npm vs pnpm vs yarn vs bun)
+   - Framework version (React 18 vs 19, Next.js 14 vs 15)
+   - Import style (ESM vs CommonJS, aliases vs relative paths)
+   - Overlapping "Do NOT" rules that widen or narrow the same boundary
+
+   When two levels disagree, report both files and what each says. Standard cascading precedence: most specific level wins. If the disagreement looks intentional (legacy module keeping its own test runner), flag it as undocumented -- it should have a comment explaining the exception.
 
 Report each finding with the specific file, line reference, what it says, and what the codebase actually shows. Suggest fixes where the correct answer is clear.
 

@@ -78,7 +78,7 @@ Check for common structural problems:
 
 - **Duplicate subdirectory files:** Subdirectory AGENTS.md that just repeats the project root content. These add noise without value -- delete them or make them area-specific.
 - **Empty context files:** Files in `context/` that are empty or contain only headings with no content. Better to not have the file than to have an empty one.
-- **Cascading contradictions:** Rules at different levels that conflict without explicit override documentation. A subdirectory saying "use Jest" while the root says "use Vitest" needs a comment explaining why.
+- **Cascading contradictions:** Rules at different levels that disagree about the same concern without a comment explaining the exception. Check these categories across all AGENTS.md files in the tree: test runner, linter/formatter, package manager, framework version, import style, and overlapping "Do NOT" boundaries. A subdirectory saying "use Jest" while the root says "use Vitest" is fine if documented -- flag it when it isn't.
 - **Missing coverage:** Directories with clearly distinct patterns (API layer, test directory, component library) that lack their own AGENTS.md when the project uses cascading.
 - **Orphaned references:** Context files that reference other context files or directories that don't exist.
 

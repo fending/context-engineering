@@ -1,5 +1,6 @@
 #!/bin/bash
 # PreToolUse hook: blocks edits to files protected by AGENTS.md boundary rules.
+# Walks the full directory ancestry to compound rules from all cascading levels.
 # Receives tool input as JSON on stdin. Exits 2 to block, 0 to allow.
 
 INPUT=$(cat)
@@ -13,63 +14,69 @@ if [[ "$FILE_PATH" != /* ]]; then
   FILE_PATH="$(pwd)/$FILE_PATH"
 fi
 
-# Walk up directory tree to find nearest AGENTS.md
-find_agents_md() {
+# Collect all AGENTS.md files from target directory up to filesystem root.
+# Deepest first so block messages cite the most specific source.
+collect_agents_md() {
   local dir="$1"
   while [[ "$dir" != "/" ]]; do
-    if [[ -f "$dir/AGENTS.md" ]]; then
-      echo "$dir/AGENTS.md"
-      return 0
-    fi
+    [[ -f "$dir/AGENTS.md" ]] && echo "$dir/AGENTS.md"
     dir=$(dirname "$dir")
   done
-  return 1
 }
 
-AGENTS_FILE=$(find_agents_md "$(dirname "$FILE_PATH")")
+AGENTS_FILES=$(collect_agents_md "$(dirname "$FILE_PATH")")
 
-# No AGENTS.md found -- nothing to enforce
-[[ -z "$AGENTS_FILE" ]] && exit 0
+# No AGENTS.md found anywhere -- nothing to enforce
+[[ -z "$AGENTS_FILES" ]] && exit 0
 
-# Extract "Do NOT" section content (lines between "## Do NOT" and next heading or EOF)
-BOUNDARY_RULES=$(sed -n '/^## Do NOT/,/^## /{/^## Do NOT/d;/^## /d;p;}' "$AGENTS_FILE")
+# Extract boundary rules from a single AGENTS.md.
+# Checks "Do NOT", "Boundaries", and "Restrictions" headings and combines all.
+extract_rules() {
+  local file="$1"
+  for heading in "Do NOT" "Boundaries" "Restrictions"; do
+    sed -n "/^## ${heading}/,/^## /{/^## ${heading}/d;/^## /d;p;}" "$file"
+  done
+}
 
-# If no "Do NOT" section, also check for "## Boundaries" section
-if [[ -z "$BOUNDARY_RULES" ]]; then
-  BOUNDARY_RULES=$(sed -n '/^## Boundaries/,/^## /{/^## Boundaries/d;/^## /d;p;}' "$AGENTS_FILE")
-fi
+# Check rules from every ancestor AGENTS.md against the target file.
+# Each file's rules are matched relative to its own directory.
+while IFS= read -r agents_file; do
+  [[ -z "$agents_file" ]] && continue
 
-# No boundary rules found
-[[ -z "$BOUNDARY_RULES" ]] && exit 0
+  BOUNDARY_RULES=$(extract_rules "$agents_file")
+  [[ -z "$BOUNDARY_RULES" ]] && continue
 
-# Get the relative path from the AGENTS.md location for pattern matching
-AGENTS_DIR=$(dirname "$AGENTS_FILE")
-REL_PATH="${FILE_PATH#$AGENTS_DIR/}"
+  AGENTS_DIR=$(dirname "$agents_file")
+  REL_PATH="${FILE_PATH#$AGENTS_DIR/}"
 
-# Check each boundary rule for path-like patterns
-while IFS= read -r rule; do
-  # Skip empty lines and non-list items
-  [[ -z "$rule" ]] && continue
-  [[ "$rule" != -* ]] && continue
+  while IFS= read -r rule; do
+    [[ -z "$rule" ]] && continue
+    [[ "$rule" != -* ]] && continue
 
-  # Strip leading "- " for matching
-  rule_text="${rule#- }"
+    rule_text="${rule#- }"
 
-  # Look for file/directory references in the rule
-  # Match common patterns: paths, extensions, directory names
-  while IFS= read -r pattern; do
-    [[ -z "$pattern" ]] && continue
-    if [[ "$REL_PATH" == *"$pattern"* ]]; then
-      echo "Blocked by AGENTS.md boundary rule:" >&2
-      echo "  Rule: $rule_text" >&2
-      echo "  File: $REL_PATH" >&2
-      echo "  Source: $AGENTS_FILE" >&2
-      echo "" >&2
-      echo "Use /scope-check to review boundaries before starting." >&2
-      exit 2
+    # Extract patterns: backtick-fenced paths first (reliable), then
+    # fall back to path-shaped tokens in plain text (best-effort).
+    patterns=$(echo "$rule_text" | grep -oE '`[^`]+`' | tr -d '`')
+    if [[ -z "$patterns" ]]; then
+      patterns=$(echo "$rule_text" | grep -oE '\.[a-zA-Z0-9]+|[a-zA-Z0-9_./-]+/[a-zA-Z0-9_./-]*' | sed 's/\/$//')
     fi
-  done < <(echo "$rule_text" | grep -oE '[a-zA-Z0-9_/-]+\.[a-zA-Z]+|[a-zA-Z0-9_-]+/' | sed 's/\/$//')
 
-done <<< "$BOUNDARY_RULES"
+    while IFS= read -r pattern; do
+      [[ -z "$pattern" ]] && continue
+      if [[ "$REL_PATH" == *"$pattern"* ]]; then
+        echo "Blocked by boundary rule:" >&2
+        echo "  Rule: $rule_text" >&2
+        echo "  File: $REL_PATH" >&2
+        echo "  Source: $agents_file" >&2
+        echo "" >&2
+        echo "Use /scope-check to review boundaries before starting." >&2
+        exit 2
+      fi
+    done <<< "$patterns"
+
+  done <<< "$BOUNDARY_RULES"
+
+done <<< "$AGENTS_FILES"
 
 exit 0

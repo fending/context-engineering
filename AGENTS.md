@@ -14,7 +14,8 @@ A public companion repo to [Rethinking Team Topologies for AI-Augmented Developm
 - `agents/` -- Agent-as-workflow pattern with two example agents and shared config
 - `agent-teams/` -- Multi-agent teams with optional Jira integration (activation, team structure, phases, templates)
 - `.claude-example/` -- Working skills and hooks configuration (copy to `.claude/`)
-- `plugins/context-setup/` -- Installable Claude Code plugin (scaffold, audit, align, upgrade context files)
+- `plugins/` -- Installable Claude Code plugins
+  - `context-setup/` -- Scaffold, audit, align, and upgrade context files
 - `evolution.md` -- What changed since the June 2025 article
 
 ## Standards

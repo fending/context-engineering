@@ -40,7 +40,7 @@ Skills are SKILL.md files in subdirectories of `.claude/skills/`. Each skill has
 
 ### /onboard
 
-Discovers context files at all levels (global, project, subdirectory, context directory, agents, skills, hooks). Summarizes each with a one-line description and modification date. Flags staleness: missing packages, nonexistent directories, outdated references.
+Discovers context files at all levels (global, project, subdirectory, context directory, agents, skills, hooks). Summarizes each with a one-line description and modification date. Flags staleness: missing packages, nonexistent directories, outdated references. Produces a context map that tells agents which files to read depending on the task, without front-loading everything.
 
 Run at session start or when joining a project. Read-only orientation -- it discovers and summarizes but doesn't create or modify anything.
 
@@ -70,17 +70,17 @@ Hooks are shell commands configured in `settings.json` that run automatically on
 
 **Script:** `hooks/boundary-guard.sh`
 
-Runs before every file edit. Walks up the directory tree to find the nearest AGENTS.md, extracts "Do NOT" and "Boundaries" sections, and checks whether the target file matches any restricted path patterns. Blocks the edit (exit 2) if it does, with a message quoting the specific boundary rule.
+Runs before every file edit. Walks the full directory ancestry to collect AGENTS.md files at every level, extracts "Do NOT", "Boundaries", and "Restrictions" sections from each, and checks whether the target file matches any restricted path patterns. Rules compound across levels -- a subdirectory boundary adds to the root boundary, it doesn't replace it. Blocks the edit (exit 2) if any rule matches, with a message quoting the specific rule and its source file.
 
 **How it works:**
 
 1. Receives target file path from stdin JSON (`tool_input.file_path`)
-2. Finds nearest AGENTS.md by walking up from the file's directory
-3. Extracts boundary rules from "Do NOT" or "Boundaries" sections
-4. Pattern-matches the target file against path references in the rules
-5. Blocks on match (exit 2 with rule quoted on stderr), silent on no match (exit 0)
+2. Collects all AGENTS.md files from the file's directory up to the filesystem root
+3. Extracts boundary rules from "Do NOT", "Boundaries", and "Restrictions" sections in each file
+4. Pattern-matches the target file against path references in the rules, relative to each AGENTS.md's own directory
+5. Blocks on first match (exit 2 with rule and source file quoted on stderr), silent on no match (exit 0)
 
-**Design notes:** The AGENTS.md parsing is deliberately simple -- grep-based pattern matching against boundary sections. It handles common cases (file paths, directory names, extensions) but isn't a full markdown parser. The transferable pattern is the hook contract: stdin JSON in, exit codes out, stderr for messaging. Adapt the parsing for your project's boundary rule format.
+**Design notes:** The hook extracts path patterns from boundary rules in two ways. Backtick-fenced paths (`` `src/auth/` ``, `` `.env` ``) are extracted exactly as written -- this is the reliable path. For rules written in plain text, the hook falls back to regex extraction of path-shaped tokens (anything with slashes or leading dots). The fallback handles common cases but is inherently best-effort on free-form English. For predictable enforcement, use backticks around file and directory references in your boundary rules. The transferable pattern is the hook contract: stdin JSON in, exit codes out, stderr for messaging.
 
 **Pairs with /scope-check:** boundary-guard catches violations at execution time (reactive). `/scope-check` catches them at planning time (proactive). Together they provide defense in depth.
 
