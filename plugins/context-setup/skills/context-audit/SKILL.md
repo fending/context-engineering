@@ -197,10 +197,13 @@ Order recommendations by impact: structural issues and missing sections first, f
 
 - **context-audit** (this skill) checks structure and completeness -- is your context well-formed?
 - **context-align** (this plugin) checks accuracy -- does your context match your code?
+- **context-usage** (this plugin) observes session tool calls -- where is context going?
 - **onboard** (`.claude-example/` skill) discovers and summarizes -- what context exists?
 - **scope-check** (`.claude-example/` skill) validates tasks against boundaries -- can I do this?
 
-Context-audit and context-align are complementary. Audit checks whether the *structure* is right (correct sections, appropriate level, no duplication). Align checks whether the *content* is right (references match reality, commands work, versions are current). Run audit when you change your context structure. Run align when you change your codebase.
+Context-audit and context-align are complementary. Audit checks whether the *structure* is right (correct sections, appropriate level, no duplication, concise commands that optimize output). Align checks whether the *content* is right (references match reality, commands work, versions are current). Run audit when you change your context structure. Run align when you change your codebase.
+
+Context-usage and context-audit category 6 are complementary. Usage is the quick diagnostic -- run it mid-session to see what's happening. If it finds verbose or repeated commands, it points you to audit for specific recommendations. Usage observes; audit prescribes.
 
 ## Notes
 

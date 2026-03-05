@@ -68,12 +68,13 @@ context-engineering/
 │   │   └── lint-markdown.sh           # Post-tool markdown linting
 │   └── settings.json                  # Hook configurations
 ├── plugins/                            # Installable plugin (generates and maintains context)
-│   └── context-setup/                  # Scaffold, audit, align, and upgrade context files
+│   └── context-setup/                  # Scaffold, audit, align, usage, and upgrade context files
 │       ├── README.md
 │       └── skills/
 │           ├── context-scaffold/SKILL.md   # Generate context files from project analysis
 │           ├── context-audit/SKILL.md      # Evaluate structure and completeness
 │           ├── context-align/SKILL.md      # Drift detection against actual codebase
+│           ├── context-usage/SKILL.md      # Session-level context consumption diagnostic
 │           └── context-upgrade/SKILL.md    # Transition between complexity levels
 └── evolution.md                   # How context engineering evolved since June 2025
 ```

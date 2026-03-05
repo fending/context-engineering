@@ -23,6 +23,10 @@ Evaluate your existing context structure for completeness and best practices. Ch
 
 Cross-reference your context files against the actual codebase to find drift. Checks tech stack references against dependencies, directory paths against the filesystem, build commands against actual scripts, skill relevance against the current stack, and cascading contradictions across context levels.
 
+### /context-setup:context-usage
+
+Quick diagnostic of context consumption from Bash tool calls in the current session. Reports verbose commands, repeated invocations, and already-concise commands. Points to `/context-setup:context-audit` for specific optimization recommendations when opportunities are found. Works only with pre-compression session history.
+
 ### /context-setup:upgrade
 
 Guide a transition from your current context level to the next one. Preserves existing content while adding missing sections (minimal to full), extracting content into a context directory (full to cascading), or describing the skills and hooks layers you can add on top.
@@ -39,6 +43,7 @@ This plugin creates, evaluates, and aligns the context files themselves:
 - `/context-setup:scaffold` generates context files from project analysis
 - `/context-setup:audit` checks structural completeness and best practices
 - `/context-setup:context-align` checks whether context files match the codebase
+- `/context-setup:context-usage` reports on session-level context consumption
 - `/context-setup:upgrade` guides transitions to higher complexity levels
 
 `context-align` appears in both places. The `.claude-example/` copy is part of a complete working `.claude/` configuration for users who copy the whole directory. The plugin version means users who only install the plugin also get drift detection without needing to copy files separately.
