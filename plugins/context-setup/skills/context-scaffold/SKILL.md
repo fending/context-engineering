@@ -73,6 +73,12 @@ Generate a single `AGENTS.md` with these sections. Populate from discovered info
 Generate a single `AGENTS.md` with all minimal sections plus the following. Populate from project analysis; bracket-placeholder what can't be detected.
 
 ```markdown
+## Command Output Notes
+
+[Generate from discovered test runner, linter, and build commands. For each command, suggest a concise invocation with flags or pipes that reduce output before it enters context. Prefer compact one-line-per-item formats over JSON when error counts could be high. Provide two variants for test commands: a quick pass/fail check (tail for summary) and a debug variant (tail with more lines for tools that put failures at the bottom, or sed to extract failure sections, or tool-native flags like --tb=short).]
+
+[If no commands can be improved with flags, skip this section.]
+
 ## Project Structure
 
 [Generate from directory scan. Show the top-level layout with one-line descriptions of what each directory contains. Focus on directories that an AI agent needs to understand -- where source code lives, where tests live, where config lives. Skip node_modules, build output, and other generated directories.]

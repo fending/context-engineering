@@ -92,6 +92,43 @@ Check for common content problems:
 - **Overly long root file:** Project-root AGENTS.md exceeding ~150 lines (candidate for cascading)
 - **Missing integration map:** Project has 2+ distinct service client packages (e.g., Supabase + Jira client, Prisma + Stripe SDK) but no integration map or equivalent domain-to-service mapping. Without this, agents default to the dominant persistence layer for new work, ignoring TODO comments or type hints that indicate a different backing service.
 
+### 6. Command Output Optimization
+
+Check whether the project could benefit from a Command Output Notes section, and if session history is available, surface specific optimization opportunities.
+
+**Structural check** (always runs):
+
+- Commands section exists but no Command Output Notes section -- recommend adding one if the project is at full single-file level or higher (skip this recommendation for minimal-level context files under ~50 lines)
+- Command Output Notes section exists but is still bracket placeholders -- flag as incomplete
+
+**Dependency-aware recommendations** (always runs):
+
+Read the project's dependency manifest and recommend concise variants for detected tools:
+
+- vitest/jest detected: suggest `npx vitest run 2>&1 | tail -5` for quick checks, `npx vitest run 2>&1 | tail -40` for debugging (vitest puts failures at the bottom)
+- pytest detected: suggest `pytest -q --no-header 2>&1 | tail -3` for quick checks, `pytest -q --tb=short` for debugging failures
+- eslint detected: suggest `eslint --format compact .` for eslint 8, or `eslint . 2>&1 | head -30` for eslint 9+ (compact was removed from core)
+- cargo/clippy detected: suggest `--message-format=short` for one-line diagnostics
+- ruff detected: suggest `ruff check --output-format concise .`
+
+Only recommend tools that are actually in the dependency tree. Do not suggest tools the project doesn't use.
+
+**Session-observed recommendations** (opportunistic -- pre-compression only):
+
+Review conversation history for Bash tool calls from the current session. If history is available (not yet compressed), identify:
+
+- Commands that were run more than once with full verbose output -- suggest the concise variant
+- Commands that returned more than ~50 lines where a flag or pipe would reduce output
+- Patterns like bare `npm test`, `cargo test`, `pytest` without output-reducing flags
+
+If conversation history has been compressed and prior tool calls are not visible, skip this tier and note: "Session history unavailable (compressed). Run `/context-audit` earlier in a session or after noticing slow responses to surface command-specific optimization opportunities."
+
+If no Bash commands were run in the visible session history, or all observed commands already use concise flags/pipes, skip this tier with a brief note ("No optimization opportunities observed in this session" or "All observed commands already use concise output").
+
+**When to surface this check prominently:**
+
+If you're experiencing slow responses or high token usage mid-session, running `/context-audit` will catch optimization opportunities that have presented since your last compression event. The session-observed tier is most useful during active development sessions, not as a periodic hygiene check.
+
 ## Report Format
 
 Present findings grouped by category with a per-category score:
@@ -116,6 +153,7 @@ Order recommendations by impact: structural issues and missing sections first, f
 - Periodically as a hygiene check alongside `/context-align`
 - When AI sessions produce unexpected results that might indicate context gaps
 - After major project changes to check if context level is still appropriate
+- Mid-session when responses feel slow or token usage seems high -- the session-observed tier catches optimization opportunities that have presented since your last compression event
 
 ## Example Output
 
@@ -137,10 +175,23 @@ Order recommendations by impact: structural issues and missing sections first, f
 > **Content Quality: Complete**
 > No stale references. Boundaries are specific. File length is appropriate for current level.
 >
+> **Command Output Optimization: Partial**
+> AGENTS.md has a Commands section but no Command Output Notes. Detected vitest and eslint in devDependencies.
+> Suggested additions:
+>
+> - `npx vitest run 2>&1 | tail -5` for quick pass/fail checks
+> - `eslint . 2>&1 | head -30` (eslint 9+ detected -- compact format removed from core)
+>
+> Session history available (3 Bash calls visible):
+>
+> - `npm test` was run twice with ~180 lines of output each time. Concise variant: `npx vitest run 2>&1 | tail -5`
+> - `npx eslint .` returned 47 lines. Concise variant: `eslint . 2>&1 | head -30`
+>
 > **Priority Recommendations:**
 >
 > 1. Upgrade to full single file -- project complexity warrants expanded coverage (run `/context-setup:upgrade`)
-> 2. Fix `src/api/AGENTS.md` duplication -- replace with API-specific content or delete
+> 2. Add Command Output Notes section -- vitest and eslint detected with concise variants available
+> 3. Fix `src/api/AGENTS.md` duplication -- replace with API-specific content or delete
 
 ## How This Differs from Other Skills
 

@@ -33,6 +33,14 @@ npm run build        # Production build
 npm run lint         # Lint and format check
 ```
 
+## Command Output Notes
+
+[Optional. Use these concise variants instead of the bare commands above. Once output enters context, the tokens are spent -- flags and pipes that reduce output matter more than reading selectively after the fact.]
+
+- [test command] -- [quick check variant and debug variant]
+- [lint command] -- [compact or structured format flag]
+- [build command] -- [error-only filtering]
+
 ## Architecture Decisions
 
 - **[Decision]:** [What it means for implementation]

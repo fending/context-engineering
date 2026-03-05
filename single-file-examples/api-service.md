@@ -50,6 +50,15 @@ service/
 [build / compile if applicable]
 ```
 
+## Command Output Notes
+
+[Optional. Use these concise variants instead of the bare commands above. Once output enters context, the tokens are spent -- flags and pipes that reduce output matter more than reading selectively after the fact. Only include commands your project actually uses.]
+
+- [test command] -- [quick check vs. debug variants, e.g., "pass/fail check: `pytest -q --no-header 2>&1 | tail -3`. Debugging failures: `pytest -q --tb=short` for compact tracebacks without the full chain"]
+- [lint command] -- [concise invocation, e.g., "use `ruff check --output-format concise .` for one-line-per-error; `--output-format json` is verbose when error count is high"]
+- [type check command] -- [filtering, e.g., "`mypy . 2>&1 | head -20` for the first batch of errors; `--no-error-summary` drops the redundant count line"]
+- [migration command] -- [what matters, e.g., "`alembic upgrade head` prints one line per applied migration; pipe is rarely needed"]
+
 ## API Design Conventions
 
 ### URL Patterns

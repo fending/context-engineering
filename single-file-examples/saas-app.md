@@ -57,6 +57,15 @@ project/
 [migration commands]
 ```
 
+## Command Output Notes
+
+[Optional. Use these concise variants instead of the bare commands above. Once output enters context, the tokens are spent -- flags and pipes that reduce output matter more than reading selectively after the fact. Only include commands your project actually uses.]
+
+- [test command] -- [quick check vs. debug variants, e.g., "pass/fail check: `npx vitest run 2>&1 | tail -5` for just the summary. Debugging failures: `npx vitest run 2>&1 | tail -40` -- vitest puts failures at the bottom, so tail captures them without passing test noise"]
+- [lint command] -- [concise invocation, e.g., "eslint 8: `eslint --format compact .` for one-line-per-error. eslint 9+: compact moved to a separate package; use `eslint . 2>&1 | head -30` to cap output from the default formatter"]
+- [build command] -- [what matters, e.g., "`next build 2>&1 | grep -E 'Error|error|Build'` for just failures; full output is only useful when debugging bundle sizes"]
+- [log command] -- [filtering, e.g., "always filter by service name: `docker compose logs web --tail=50`; unfiltered logs interleave all services"]
+
 ## Code Standards
 
 ### Frontend
@@ -136,3 +145,5 @@ project/
 **Architecture decisions are stated, not argued.** The AI needs to know *what's true*, not why you considered alternatives. If the reasoning matters for future decisions, put it in a dedicated architecture decisions document.
 
 **Auth and data model sections prevent the worst bugs.** An AI that doesn't understand your tenancy model will generate queries that leak data across organizations. An AI that doesn't understand your permission model will skip authorization checks. These sections are load-bearing.
+
+**Command output notes are optional but high-value for token-heavy sessions.** They work by changing how the AI *runs* commands, not how it reads results. Once output enters context, the tokens are spent. A note like "use `npx vitest run 2>&1 | tail -5`" prevents 200 lines of passing tests from entering context in the first place -- no compression tools needed.

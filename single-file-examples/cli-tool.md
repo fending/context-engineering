@@ -44,6 +44,14 @@ tool/
 [link locally for testing]
 ```
 
+## Command Output Notes
+
+[Optional. Use these concise variants instead of the bare commands above. Once output enters context, the tokens are spent -- flags and pipes that reduce output matter more than reading selectively after the fact. Distinct from the Output section below, which covers this tool's own output conventions.]
+
+- [test command] -- [quick check vs. debug variants, e.g., "pass/fail check: `cargo test 2>&1 | grep 'test result'` for just the summary line. Debugging failures: `cargo test 2>&1 | sed -n '/^failures:/,$ p'` to get only the failure details"]
+- [lint/clippy command] -- [concise invocation, e.g., "`cargo clippy --message-format=short 2>&1` for one-line-per-warning; default format repeats the source context"]
+- [build command] -- [what matters, e.g., "`cargo build --message-format=short 2>&1` for compact errors; default output includes the source span"]
+
 ## CLI Design Conventions
 
 ### Subcommand Structure
