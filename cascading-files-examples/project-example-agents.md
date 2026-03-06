@@ -41,6 +41,14 @@ npm run lint         # Lint and format check
 - [lint command] -- [compact or structured format flag]
 - [build command] -- [error-only filtering]
 
+## MCP Tool Notes
+
+[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters prevents large responses from consuming context. Only include tools your project actually uses.]
+
+- [tool name] -- [field limits, query filters, or pagination notes]
+- [tool name] -- [when to use a targeted call vs. a list/search call]
+- [tool name] -- [compact alternatives to full-payload defaults]
+
 ## Architecture Decisions
 
 - **[Decision]:** [What it means for implementation]

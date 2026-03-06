@@ -66,6 +66,19 @@ project/
 - [build command] -- [what matters, e.g., "`next build 2>&1 | grep -E 'Error|error|Build'` for just failures; full output is only useful when debugging bundle sizes"]
 - [log command] -- [filtering, e.g., "always filter by service name: `docker compose logs web --tail=50`; unfiltered logs interleave all services"]
 
+## MCP Tool Notes
+
+[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters in tool calls prevents large responses from consuming context. Only include tools your project actually uses.]
+
+- **Atlassian (Jira)** -- [e.g., "use `searchJiraIssuesUsingJql` with specific JQL and limit results to 10; `getJiraIssue` returns all fields by default -- prefer it only for single-ticket lookups, not bulk queries"]
+- **Atlassian (Confluence)** -- [e.g., "use `searchConfluenceUsingCql` with narrow CQL over `getPagesInConfluenceSpace` which returns all pages; `getConfluencePage` is fine for known page IDs"]
+- **Gmail** -- [e.g., "`gmail_search_messages` with specific query filters (from:, subject:, after:) rather than broad searches; `gmail_read_thread` pulls every message in the thread -- use `gmail_read_message` for single messages when thread context isn't needed"]
+- **Google Calendar** -- [e.g., "`gcal_list_events` with tight date ranges; `gcal_find_meeting_times` is cheaper than listing all events and filtering manually"]
+- **Web** -- [e.g., "`WebFetch` returns full page content -- prefer API endpoints over HTML pages when available; `WebSearch` results are compact but follow-up fetches are expensive"]
+- **GitHub** -- [e.g., "use targeted queries: PR by number, file by path, diff by commit range; avoid listing all PRs or all issues without filters"]
+- **Supabase** -- [e.g., "query with `.select('col1, col2')` to limit columns returned; avoid `select('*')` on wide tables; use `.limit()` and `.range()` for pagination"]
+- **Vercel** -- [e.g., "filter deployment logs by status or time range; listing all deployments without filters returns the full history"]
+
 ## Code Standards
 
 ### Frontend
@@ -146,4 +159,4 @@ project/
 
 **Auth and data model sections prevent the worst bugs.** An AI that doesn't understand your tenancy model will generate queries that leak data across organizations. An AI that doesn't understand your permission model will skip authorization checks. These sections are load-bearing.
 
-**Command output notes are optional but high-value for token-heavy sessions.** They work by changing how the AI *runs* commands, not how it reads results. Once output enters context, the tokens are spent. A note like "use `npx vitest run 2>&1 | tail -5`" prevents 200 lines of passing tests from entering context in the first place -- no compression tools needed.
+**Command output notes and MCP tool notes are optional but high-value for token-heavy sessions.** They work by changing how the AI *runs* commands and *calls* tools, not how it reads results. Once output enters context, the tokens are spent. A note like "use `npx vitest run 2>&1 | tail -5`" prevents 200 lines of passing tests from entering context; a note like "use `gmail_search_messages` with specific query filters" prevents full inbox scans from doing the same.
