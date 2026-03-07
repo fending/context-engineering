@@ -70,14 +70,14 @@ project/
 
 [Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters in tool calls prevents large responses from consuming context. Only include tools your project actually uses.]
 
-- **Atlassian (Jira)** -- [e.g., "use `searchJiraIssuesUsingJql` with specific JQL and limit results to 10; `getJiraIssue` returns all fields by default -- prefer it only for single-ticket lookups, not bulk queries"]
+- **Atlassian (Jira)** -- [e.g., "use `searchJiraIssuesUsingJql` with `fields: [\"summary\", \"status\"]` and `maxResults: 5`; default fields include `description` which roughly doubles payload per issue"]
 - **Atlassian (Confluence)** -- [e.g., "use `searchConfluenceUsingCql` with narrow CQL over `getPagesInConfluenceSpace` which returns all pages; `getConfluencePage` is fine for known page IDs"]
-- **Gmail** -- [e.g., "`gmail_search_messages` with specific query filters (from:, subject:, after:) rather than broad searches; `gmail_read_thread` pulls every message in the thread -- use `gmail_read_message` for single messages when thread context isn't needed"]
-- **Google Calendar** -- [e.g., "`gcal_list_events` with tight date ranges; `gcal_find_meeting_times` is cheaper than listing all events and filtering manually"]
-- **Web** -- [e.g., "`WebFetch` returns full page content -- prefer API endpoints over HTML pages when available; `WebSearch` results are compact but follow-up fetches are expensive"]
-- **GitHub** -- [e.g., "use targeted queries: PR by number, file by path, diff by commit range; avoid listing all PRs or all issues without filters"]
-- **Supabase** -- [e.g., "query with `.select('col1, col2')` to limit columns returned; avoid `select('*')` on wide tables; use `.limit()` and `.range()` for pagination"]
-- **Vercel** -- [e.g., "filter deployment logs by status or time range; listing all deployments without filters returns the full history"]
+- **Gmail** -- [e.g., "`gmail_search_messages` with `maxResults: 3-5` and specific query filters (from:, subject:, after:); default is 20 results. Use `gmail_read_message` over `gmail_read_thread` when you need one message"]
+- **Google Calendar** -- [e.g., "`gcal_list_events` with tight date ranges, `maxResults: 5-10`, and `condenseEventDetails: true` (default); setting condensed to false adds full attendee lists per event"]
+- **Web** -- [e.g., "`WebFetch` with a focused `prompt` parameter -- it's the only knob controlling output size. `WebSearch` with `allowed_domains` to narrow results; avoid chaining into multiple fetches"]
+- **GitHub** -- [e.g., "prefer CLI over MCP for reads: `gh issue view <N> --json title,state` returns 1 line vs. ~100 lines from MCP `get_issue` (no field selection). MCP is fine for writes (creating issues, PRs)"]
+- **Supabase** -- [e.g., "`list_tables` with `verbose: false` (default) for compact output; `SELECT id, status` with `LIMIT` instead of `SELECT *` -- column selection alone is ~6x reduction"]
+- **Vercel** -- [e.g., "`list_deployments` requires a project ID (no cross-project flooding) but returns 20 items with verbose git metadata; use `since`/`until` timestamps to narrow the window. `get_deployment_build_logs` with `limit: 10-20` (default 100). `get_runtime_logs` with `level: [\"error\"]` and tight `since`/`until` -- default is 50 entries across all levels"]
 
 ## Code Standards
 

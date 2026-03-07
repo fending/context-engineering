@@ -114,7 +114,7 @@ These patterns work regardless of which AI coding tool you use. They emerged fro
 Every file in this repo is designed to be copied and adapted. Where examples need specifics, they use generic placeholders and describe the *kind* of content that belongs there rather than inventing fictional companies or products. The structures and patterns are drawn from real use.
 
 1. Pick the approach that matches your current project complexity
-2. Copy the relevant files into your project -- or if you use Claude Code, run `/context-setup:scaffold` to generate them pre-populated from your project's dependencies, directory structure, and config files
+2. Copy the relevant files into your project -- or if you use Claude Code, run `/context-setup:context-scaffold` to generate them pre-populated from your project's dependencies, directory structure, and config files
 3. Replace the placeholder content with your own
 4. Iterate -- context engineering is ongoing, not a one-time setup
 

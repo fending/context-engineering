@@ -24,7 +24,7 @@ Guide a transition from your current context level to the next one without losin
 
 ### No Context to Minimal
 
-Equivalent to running `/context-setup:scaffold` at the minimal level. Generate AGENTS.md from project analysis with sections: project description, tech stack, commands, code standards, Do NOT. Create CLAUDE.md symlink.
+Equivalent to running `/context-setup:context-scaffold` at the minimal level. Generate AGENTS.md from project analysis with sections: project description, tech stack, commands, code standards, Do NOT. Create CLAUDE.md symlink.
 
 ### Minimal to Full Single File
 
@@ -127,7 +127,7 @@ Note: Hook registration (settings.json format, event types) is Claude Code-speci
 
 ## When to Use
 
-- After `/context-setup:audit` recommends upgrading to a higher level
+- After `/context-setup:context-audit` recommends upgrading to a higher level
 - When your AGENTS.md is getting too long for a single file
 - When adding contributors (human or AI) who need better context coverage
 - When moving from solo development to team development

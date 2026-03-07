@@ -92,7 +92,18 @@ Check for common content problems:
 - **Overly long root file:** Project-root AGENTS.md exceeding ~150 lines (candidate for cascading)
 - **Missing integration map:** Project has 2+ distinct service client packages (e.g., Supabase + Jira client, Prisma + Stripe SDK) but no integration map or equivalent domain-to-service mapping. Without this, agents default to the dominant persistence layer for new work, ignoring TODO comments or type hints that indicate a different backing service.
 
-### 6. Command Output Optimization
+### 6. MCP Tool Notes Cross-Reference
+
+Check whether the project has MCP servers configured but no MCP Tool Notes section.
+
+- Scan for MCP config files at project level: `.mcp.json`, `.codex/config.toml`, `.gemini/settings.json`, `.vscode/mcp.json`, `.cursor/mcp.json`
+- If any MCP config is found and AGENTS.md has no MCP Tool Notes section: report as a finding with a pointer to `/context-setup:context-mcp`
+- If MCP Tool Notes exists but is still bracket placeholders: flag as incomplete with the same pointer
+- If no MCP configs are found: skip this check silently
+
+This check does not inspect tool registries, generate templates, or make recommendations about specific MCP tools. That's `/context-setup:context-mcp`'s domain. This check only surfaces the gap.
+
+### 7. Command Output Optimization
 
 Check whether the project could benefit from a Command Output Notes section, and if session history is available, surface specific optimization opportunities.
 
@@ -121,13 +132,13 @@ Review conversation history for Bash tool calls from the current session. If his
 - Commands that returned more than ~50 lines where a flag or pipe would reduce output
 - Patterns like bare `npm test`, `cargo test`, `pytest` without output-reducing flags
 
-If conversation history has been compressed and prior tool calls are not visible, skip this tier and note: "Session history unavailable (compressed). Run `/context-audit` earlier in a session or after noticing slow responses to surface command-specific optimization opportunities."
+If conversation history has been compressed and prior tool calls are not visible, skip this tier and note: "Session history unavailable (compressed). Run `/context-setup:context-audit` earlier in a session or after noticing slow responses to surface command-specific optimization opportunities."
 
 If no Bash commands were run in the visible session history, or all observed commands already use concise flags/pipes, skip this tier with a brief note ("No optimization opportunities observed in this session" or "All observed commands already use concise output").
 
 **When to surface this check prominently:**
 
-If you're experiencing slow responses or high token usage mid-session, running `/context-audit` will catch optimization opportunities that have presented since your last compression event. The session-observed tier is most useful during active development sessions, not as a periodic hygiene check.
+If you're experiencing slow responses or high token usage mid-session, running `/context-setup:context-audit` will catch optimization opportunities that have presented since your last compression event. The session-observed tier is most useful during active development sessions, not as a periodic hygiene check.
 
 ## Report Format
 
@@ -148,7 +159,7 @@ Order recommendations by impact: structural issues and missing sections first, f
 
 ## When to Use
 
-- After running `/context-setup:scaffold` to verify the generated structure
+- After running `/context-setup:context-scaffold` to verify the generated structure
 - Before onboarding new contributors to ensure context is complete
 - Periodically as a hygiene check alongside `/context-align`
 - When AI sessions produce unexpected results that might indicate context gaps
@@ -175,6 +186,9 @@ Order recommendations by impact: structural issues and missing sections first, f
 > **Content Quality: Complete**
 > No stale references. Boundaries are specific. File length is appropriate for current level.
 >
+> **MCP Tool Notes: Missing**
+> `.mcp.json` found with 2 configured servers (atlassian, supabase). No MCP Tool Notes section in AGENTS.md. Run `/context-setup:context-mcp` for optimization recommendations.
+>
 > **Command Output Optimization: Partial**
 > AGENTS.md has a Commands section but no Command Output Notes. Detected vitest and eslint in devDependencies.
 > Suggested additions:
@@ -189,7 +203,7 @@ Order recommendations by impact: structural issues and missing sections first, f
 >
 > **Priority Recommendations:**
 >
-> 1. Upgrade to full single file -- project complexity warrants expanded coverage (run `/context-setup:upgrade`)
+> 1. Upgrade to full single file -- project complexity warrants expanded coverage (run `/context-setup:context-upgrade`)
 > 2. Add Command Output Notes section -- vitest and eslint detected with concise variants available
 > 3. Fix `src/api/AGENTS.md` duplication -- replace with API-specific content or delete
 
@@ -197,6 +211,7 @@ Order recommendations by impact: structural issues and missing sections first, f
 
 - **context-audit** (this skill) checks structure and completeness -- is your context well-formed?
 - **context-align** (this plugin) checks accuracy -- does your context match your code?
+- **context-mcp** (this plugin) detects MCP servers and generates optimization guidance -- are your MCP tools documented?
 - **context-usage** (this plugin) observes session tool calls -- where is context going?
 - **onboard** (`.claude-example/` skill) discovers and summarizes -- what context exists?
 - **scope-check** (`.claude-example/` skill) validates tasks against boundaries -- can I do this?
@@ -209,6 +224,6 @@ Context-usage and context-audit category 6 are complementary. Usage is the quick
 
 The level appropriateness check uses heuristics, not rules. A project with 50 directories might legitimately need only a minimal AGENTS.md if it's a monorepo where each package is simple. The audit surfaces the mismatch; the human decides whether it's intentional.
 
-Section completeness is checked against the standard templates from `/context-setup:scaffold`. If you've intentionally omitted a section (no API to document, no auth layer), the audit will flag it -- acknowledge and move on. The goal is awareness, not compliance.
+Section completeness is checked against the standard templates from `/context-setup:context-scaffold`. If you've intentionally omitted a section (no API to document, no auth layer), the audit will flag it -- acknowledge and move on. The goal is awareness, not compliance.
 
-The audit is structural, not semantic. It can check whether an "Architecture" section exists and has content, but it can't check whether that content accurately describes your architecture. That requires human review or the code-level checks that `/context-align` provides.
+The audit is structural, not semantic. It can check whether an "Architecture" section exists and has content, but it can't check whether that content accurately describes your architecture. That requires human review or the code-level checks that `/context-setup:context-align` provides.

@@ -1,6 +1,6 @@
 # context-setup
 
-A Claude Code plugin for scaffolding, auditing, aligning, and upgrading context engineering files. Generates AGENTS.md files, context directories, and cascading structures based on your project's actual stack and complexity.
+A Claude Code plugin for scaffolding, auditing, aligning, optimizing MCP tools, and upgrading context engineering files. Generates AGENTS.md files, context directories, and cascading structures based on your project's actual stack and complexity.
 
 ## Install
 
@@ -11,11 +11,13 @@ A Claude Code plugin for scaffolding, auditing, aligning, and upgrading context 
 
 ## Skills
 
-### /context-setup:scaffold
+When no other installed plugin has a skill with the same name, Claude Code allows the short form -- `/context-scaffold` instead of `/context-setup:context-scaffold`. The full namespaced form always works.
+
+### /context-setup:context-scaffold
 
 Analyze your project and generate the right context files pre-populated with discovered information. Detects tech stack, framework, directory structure, and existing context. Recommends a complexity level (minimal, full single file, or cascading with context directory) and generates the corresponding files.
 
-### /context-setup:audit
+### /context-setup:context-audit
 
 Evaluate your existing context structure for completeness and best practices. Checks whether your context complexity matches your project complexity, whether required sections are present, whether format conventions are followed, and whether structural issues exist (duplicated subdirectory files, empty context directory files, cascading contradictions).
 
@@ -27,7 +29,11 @@ Cross-reference your context files against the actual codebase to find drift. Ch
 
 Quick diagnostic of context consumption from Bash tool calls in the current session. Reports verbose commands, repeated invocations, and already-concise commands. Points to `/context-setup:context-audit` for specific optimization recommendations when opportunities are found. Works only with pre-compression session history.
 
-### /context-setup:upgrade
+### /context-setup:context-mcp
+
+Detect connected MCP servers across platforms, match them against known optimization templates, and generate MCP Tool Notes for your AGENTS.md. For servers without known templates, interactively discover optimization opportunities by inspecting tool registries and optionally making test calls with user confirmation.
+
+### /context-setup:context-upgrade
 
 Guide a transition from your current context level to the next one. Preserves existing content while adding missing sections (minimal to full), extracting content into a context directory (full to cascading), or describing the skills and hooks layers you can add on top.
 
@@ -40,11 +46,12 @@ The `.claude-example/` directory in the parent repo provides operational skills 
 
 This plugin creates, evaluates, and aligns the context files themselves:
 
-- `/context-setup:scaffold` generates context files from project analysis
-- `/context-setup:audit` checks structural completeness and best practices
+- `/context-setup:context-scaffold` generates context files from project analysis
+- `/context-setup:context-audit` checks structural completeness and best practices
 - `/context-setup:context-align` checks whether context files match the codebase
 - `/context-setup:context-usage` reports on session-level context consumption
-- `/context-setup:upgrade` guides transitions to higher complexity levels
+- `/context-setup:context-mcp` detects MCP servers and generates optimization guidance
+- `/context-setup:context-upgrade` guides transitions to higher complexity levels
 
 `context-align` appears in both places. The `.claude-example/` copy is part of a complete working `.claude/` configuration for users who copy the whole directory. The plugin version means users who only install the plugin also get drift detection without needing to copy files separately.
 

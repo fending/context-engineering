@@ -51,7 +51,7 @@ For verbose commands where a concise variant is known, estimate the token reduct
 
 Use ~3 tokens per line as the rough conversion. This is an approximation -- actual token counts depend on line length, formatting, and encoding. The estimate is directionally useful for deciding whether optimization is worth pursuing.
 
-This is distinct from the built-in `/usage` command, which shows your account quota consumption. `/context-usage` estimates how much of the context *window* is consumed by tool output within the current session.
+This is distinct from the built-in `/usage` command, which shows your account quota consumption. `/context-setup:context-usage` estimates how much of the context *window* is consumed by tool output within the current session.
 
 ### 5. Handoff
 
@@ -65,7 +65,7 @@ If nothing notable was found:
 
 If session history appears compressed (zero or very few Bash calls visible despite an active session, or conversation history starts abruptly without earlier context):
 
-> Session history unavailable (likely compressed). Run `/context-usage` earlier in a session -- before compression -- to catch optimization opportunities. For best results, run when responses start feeling slow or after a burst of command activity.
+> Session history unavailable (likely compressed). Run `/context-setup:context-usage` earlier in a session -- before compression -- to catch optimization opportunities. For best results, run when responses start feeling slow or after a burst of command activity.
 
 ## When to Use
 
@@ -74,7 +74,7 @@ If session history appears compressed (zero or very few Bash calls visible despi
 - Before a long debugging session to establish a baseline
 - When you're curious where context is going
 
-This skill is fast and read-only. It changes nothing, installs nothing, and produces a short summary. Use it as a triage step before deciding whether a full `/context-audit` is worth running.
+This skill is fast and read-only. It changes nothing, installs nothing, and produces a short summary. Use it as a triage step before deciding whether a full `/context-setup:context-audit` is worth running.
 
 ## Example Output
 
@@ -102,14 +102,14 @@ This skill is fast and read-only. It changes nothing, installs nothing, and prod
 
 ## How This Differs from Context Audit
 
-`/context-usage` observes the current session and reports what it sees. It does not read project files, check dependencies, or generate recommendations. It answers: "what happened in this session?"
+`/context-setup:context-usage` observes the current session and reports what it sees. It does not read project files, check dependencies, or generate recommendations. It answers: "what happened in this session?"
 
-`/context-audit` (category 6) reads your project's dependency manifest, checks for missing Command Output Notes sections, and generates specific concise command recommendations. It answers: "what should you change?"
+`/context-setup:context-audit` (category 6) reads your project's dependency manifest, checks for missing Command Output Notes sections, and generates specific concise command recommendations. It answers: "what should you change?"
 
-Use `/context-usage` as the quick check. If it finds something, `/context-audit` tells you what to do about it.
+Use `/context-setup:context-usage` as the quick check. If it finds something, `/context-setup:context-audit` tells you what to do about it.
 
 ## Notes
 
 This skill only works with conversation history that hasn't been compressed. After compression, prior Bash calls and their outputs are summarized or removed, making accurate observation impossible. The skill detects this and tells you to run it earlier next time.
 
-Token estimates use ~3 tokens per line as a rough conversion. Actual token counts depend on line length, formatting, and encoding -- a line of JSON is more tokens than a line of plain text. The estimates are directionally useful ("that command cost ~540 tokens and could cost ~15") even if not exact. This is distinct from the built-in `/usage` command, which shows account quota consumption. `/context-usage` estimates context *window* utilization from tool output within the current session.
+Token estimates use ~3 tokens per line as a rough conversion. Actual token counts depend on line length, formatting, and encoding -- a line of JSON is more tokens than a line of plain text. The estimates are directionally useful ("that command cost ~540 tokens and could cost ~15") even if not exact. This is distinct from the built-in `/usage` command, which shows account quota consumption. `/context-setup:context-usage` estimates context *window* utilization from tool output within the current session.

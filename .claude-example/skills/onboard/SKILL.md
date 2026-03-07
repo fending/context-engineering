@@ -73,7 +73,7 @@ Report findings conversationally. This is orientation, not an audit -- surface w
 
 ## Notes
 
-This skill is read-only orientation. It discovers and summarizes what exists but doesn't create or modify context files. For scaffolding new context structures, see the `context-setup` plugin (`/context-setup:scaffold`).
+This skill is read-only orientation. It discovers and summarizes what exists but doesn't create or modify context files. For scaffolding new context structures, see the `context-setup` plugin (`/context-setup:context-scaffold`).
 
 Modification dates matter because context files rot. A file modified 6 months ago in an actively developed project is worth flagging -- not because it's necessarily wrong, but because it hasn't been reviewed alongside the code it describes.
 
