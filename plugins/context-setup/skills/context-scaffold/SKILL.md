@@ -17,6 +17,7 @@ Analyze your project and generate the right context files pre-populated with wha
    - Check for `.claude/` directory (existing skills, hooks, settings)
    - Identify testing setup: test runner config, test directories, test scripts
    - Detect multiple backing services: count distinct service client packages (e.g., supabase + jira, prisma + stripe, aws-sdk + firebase). If 2+ detected, flag for Integration Map section.
+   - Detect MCP server configs: check `.mcp.json`, `.vscode/mcp.json`, `.cursor/mcp.json`, `.codex/config.toml`, `.gemini/settings.json` at the project level. Match detected servers against known templates (Atlassian, Gmail, Google Calendar, Web, GitHub, Supabase, Vercel). If any are found, include an MCP Tool Notes section in the generated output.
 
 2. **Determine complexity level.** Present a recommendation with rationale, let the user choose:
    - **Minimal** (~40 lines): Solo project, single language, straightforward structure. One deployment target, no auth layer, no multi-service architecture.
@@ -49,6 +50,15 @@ Generate a single `AGENTS.md` with these sections. Populate from discovered info
 
 [List discovered from package.json scripts, Makefile targets, or equivalent. Include only commands a developer would actually run -- dev, build, test, lint, deploy. Use the exact command syntax.]
 
+## MCP Tool Notes
+
+[Generate this section only if MCP server configs were detected during discovery. For each detected server that matches a known template, include the pre-populated entry. For detected servers without a known template, include a placeholder with a pointer to `/context-setup:context-mcp` for interactive discovery. If no MCP configs were detected, skip this section entirely.]
+
+[Known server entries to use when matched -- see `/context-setup:context-mcp` SKILL.md for the full template text for each server family: Atlassian, Gmail, Google Calendar, Web, GitHub, Supabase, Vercel.]
+
+[For unknown servers:]
+- **[server name]** -- [run `/context-setup:context-mcp` for optimization recommendations for this server]
+
 ## Code Standards
 
 [Infer what you can from config files:]
@@ -78,6 +88,10 @@ Generate a single `AGENTS.md` with all minimal sections plus the following. Popu
 [Generate from discovered test runner, linter, and build commands. For each command, suggest a concise invocation with flags or pipes that reduce output before it enters context. Prefer compact one-line-per-item formats over JSON when error counts could be high. Provide two variants for test commands: a quick pass/fail check (tail for summary) and a debug variant (tail with more lines for tools that put failures at the bottom, or sed to extract failure sections, or tool-native flags like --tb=short).]
 
 [If no commands can be improved with flags, skip this section.]
+
+## MCP Tool Notes
+
+[Same logic as the minimal template: generate only if MCP configs detected, use known templates for recognized servers, placeholder for unknown servers. At the full level, this section sits between Command Output Notes and Project Structure -- the same position used in the single-file examples.]
 
 ## Project Structure
 
@@ -177,6 +191,8 @@ Each subdirectory file should contain only what's specific to that area. Do not 
 > **Tech stack:** Node.js 20, Next.js 15, React 19, TypeScript, Tailwind CSS, Prisma with PostgreSQL, deployed on Vercel.
 >
 > **Structure:** 47 directories, 3 distinct areas (app routes, API routes, shared components). Auth via NextAuth with GitHub and Google providers.
+>
+> **MCP servers:** `.mcp.json` found with 2 servers (supabase, github-mcp-server). Both match known templates -- MCP Tool Notes will be pre-populated.
 >
 > **Recommendation: Full single file.** This is a single deployable app with enough layers (frontend, API, database, auth) to benefit from the expanded template, but not complex enough to warrant a context directory. One AGENTS.md covers it.
 >

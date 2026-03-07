@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+- Add MCP config detection to `/context-setup:context-scaffold` -- detects MCP servers during scaffolding and pre-populates MCP Tool Notes for known servers; unknown servers get a placeholder pointing to `/context-setup:context-mcp`
+- Extend `/context-setup:context-usage` to observe MCP tool calls alongside Bash -- flags default-parameter MCP calls, estimates token savings, hands off to `/context-setup:context-mcp` for MCP-specific recommendations
+- Fix context-audit category numbering reference (category 6 -> 7 for command output optimization after MCP cross-reference insertion)
+
 ## 1.1.0
 
 - Add `/context-setup:context-mcp` skill -- detects connected MCP servers, matches against known optimization templates (Atlassian, Gmail, Google Calendar, Web, GitHub, Supabase, Vercel), generates MCP Tool Notes for AGENTS.md, and interactively discovers optimization opportunities for unknown servers

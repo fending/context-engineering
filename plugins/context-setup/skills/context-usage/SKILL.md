@@ -1,6 +1,6 @@
 ---
 name: context-usage
-description: Reports on token consumption from Bash tool calls in the current session. Estimates tokens used, tokens recoverable, and points to context-audit for specific optimization recommendations.
+description: Reports on token consumption from Bash and MCP tool calls in the current session. Estimates tokens used, tokens recoverable, and points to context-audit and context-mcp for specific optimization recommendations.
 ---
 
 # Context Usage
@@ -9,37 +9,40 @@ Quick diagnostic of how tool calls in the current session are consuming context.
 
 ## What This Skill Does
 
-Review visible conversation history and report on Bash tool calls from the current session. This is a lightweight observation -- no file changes, no recommendations, just a summary of what happened and where context went. Focuses on Bash calls because they produce the most variable output; Read/Grep/Glob calls are generally predictable in size.
+Review visible conversation history and report on Bash and MCP tool calls from the current session. This is a lightweight observation -- no file changes, no recommendations, just a summary of what happened and where context went. Focuses on Bash and MCP calls because they produce the most variable output; Read/Grep/Glob calls are generally predictable in size.
 
 ### 1. Session Tool Call Summary
 
-Count visible Bash tool calls and estimate token consumption:
+Count visible Bash and MCP tool calls and estimate token consumption:
 
 - Total Bash calls in visible history
-- Estimated total tokens consumed by Bash output (approximate at ~3 tokens per line of output)
-- Commands that produced more than ~50 lines of output (flag as verbose)
-- Commands that were run more than once with the same or similar invocation (flag as repeated)
+- Total MCP tool calls in visible history (tools prefixed with `mcp__`)
+- Estimated total tokens consumed by all tool output (approximate at ~3 tokens per line of output)
+- Commands or tool calls that produced more than ~50 lines of output (flag as verbose)
+- Commands or tool calls that were run more than once with the same or similar invocation (flag as repeated)
 - Commands that already use concise flags or pipes (acknowledge as concise)
 
-### 2. Verbose Command Report
+### 2. Verbose Output Report
 
-For each command that produced notably verbose output, report:
+For each Bash command or MCP tool call that produced notably verbose output, report:
 
-- The command that was run
+- The command or tool call (including key parameters)
 - Approximate output size (line count from what's visible)
-- Whether a concise variant is known (based on common tools: vitest, pytest, eslint, cargo, ruff, tsc, docker compose)
+- Whether a concise variant is known:
+  - For Bash: based on common tools (vitest, pytest, eslint, cargo, ruff, tsc, docker compose)
+  - For MCP: whether the call used default parameters when known optimization knobs exist (e.g., `gmail_search_messages` without `maxResults`, `list_deployments` without `since`/`until`, `searchJiraIssuesUsingJql` without `fields`)
 
-Do not suggest the concise variant here -- just flag the command and note that a variant may exist. The goal is awareness, not prescription.
+Do not suggest the concise variant here -- just flag the call and note that a variant may exist. The goal is awareness, not prescription.
 
 ### 3. Repetition Report
 
-For commands run more than once with similar invocations:
+For Bash commands or MCP tool calls run more than once with similar invocations:
 
-- The command pattern
+- The command or tool call pattern
 - How many times it appeared
 - Whether the output was similarly verbose each time
 
-Repeated verbose commands are the highest-value optimization target -- they compound token cost.
+Repeated verbose calls are the highest-value optimization target -- they compound token cost.
 
 ### 4. Estimated Savings
 
@@ -55,9 +58,13 @@ This is distinct from the built-in `/usage` command, which shows your account qu
 
 ### 5. Handoff
 
-If any verbose or repeated commands were identified, close with:
+If any verbose or repeated Bash commands were identified, close with:
 
 > Optimization opportunities found. Run `/context-setup:context-audit` for specific recommendations on concise command variants for your project's toolchain.
+
+If any verbose or default-parameter MCP tool calls were identified, add:
+
+> MCP optimization opportunities found. Run `/context-setup:context-mcp` for recommendations on parameter knobs that reduce MCP tool output.
 
 If nothing notable was found:
 
@@ -80,7 +87,7 @@ This skill is fast and read-only. It changes nothing, installs nothing, and prod
 
 > **Context Usage -- Session Summary**
 >
-> 14 Bash calls in visible history. Estimated ~1,800 tokens consumed by Bash output.
+> 14 Bash calls and 3 MCP tool calls in visible history. Estimated ~2,400 tokens consumed by tool output.
 >
 > **Verbose commands (4):**
 >
@@ -88,6 +95,10 @@ This skill is fast and read-only. It changes nothing, installs nothing, and prod
 > - `npm test` -- ~180 lines (~540 tokens). Repeat of above.
 > - `npx eslint .` -- ~65 lines (~195 tokens). Concise variant may exist (eslint detected).
 > - `bundle exec rspec` -- ~120 lines (~360 tokens). No known concise variant.
+>
+> **Verbose MCP calls (1):**
+>
+> - `mcp__gmail__gmail_search_messages` -- ~200 lines (~600 tokens). Called with default maxResults (20). Optimization knob available: `maxResults: 3-5`.
 >
 > **Repeated commands (1 pattern):**
 >
@@ -98,18 +109,20 @@ This skill is fast and read-only. It changes nothing, installs nothing, and prod
 > - `npm run build 2>&1 | grep Error` -- already piped.
 > - `git diff --stat` -- short by nature.
 >
-> **Estimated savings:** ~1,260 tokens recoverable if concise variants were used for `npm test` (2x ~540 -> 2x ~15) and `eslint .` (~195 -> ~90). Run `/context-setup:context-audit` for specific recommendations.
+> **Estimated savings:** ~1,860 tokens recoverable. Bash: `npm test` (2x ~540 -> 2x ~15) and `eslint .` (~195 -> ~90). MCP: `gmail_search_messages` (~600 -> ~150 with maxResults: 5). Run `/context-setup:context-audit` for CLI recommendations. Run `/context-setup:context-mcp` for MCP recommendations.
 
 ## How This Differs from Context Audit
 
 `/context-setup:context-usage` observes the current session and reports what it sees. It does not read project files, check dependencies, or generate recommendations. It answers: "what happened in this session?"
 
-`/context-setup:context-audit` (category 6) reads your project's dependency manifest, checks for missing Command Output Notes sections, and generates specific concise command recommendations. It answers: "what should you change?"
+`/context-setup:context-audit` (category 7) reads your project's dependency manifest, checks for missing Command Output Notes sections, and generates specific concise command recommendations. It answers: "what should you change about CLI commands?"
 
-Use `/context-setup:context-usage` as the quick check. If it finds something, `/context-setup:context-audit` tells you what to do about it.
+`/context-setup:context-mcp` detects MCP configs, matches against known templates, and generates MCP Tool Notes. It answers: "what should you change about MCP tool calls?"
+
+Use `/context-setup:context-usage` as the quick check. If it finds Bash issues, `/context-setup:context-audit` tells you what to do. If it finds MCP issues, `/context-setup:context-mcp` tells you what to do.
 
 ## Notes
 
-This skill only works with conversation history that hasn't been compressed. After compression, prior Bash calls and their outputs are summarized or removed, making accurate observation impossible. The skill detects this and tells you to run it earlier next time.
+This skill only works with conversation history that hasn't been compressed. After compression, prior tool calls and their outputs are summarized or removed, making accurate observation impossible. The skill detects this and tells you to run it earlier next time.
 
 Token estimates use ~3 tokens per line as a rough conversion. Actual token counts depend on line length, formatting, and encoding -- a line of JSON is more tokens than a line of plain text. The estimates are directionally useful ("that command cost ~540 tokens and could cost ~15") even if not exact. This is distinct from the built-in `/usage` command, which shows account quota consumption. `/context-setup:context-usage` estimates context *window* utilization from tool output within the current session.
