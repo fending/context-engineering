@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+- Remove `version` field from plugin.json so cache keys use git SHA instead of semver -- reinstalls now pick up new commits automatically (matching the pattern used by official Anthropic plugins that auto-update). This is a VERY dumb hack to get auto-updates working, but with the micro-releases I'm doing this makes the most sense for this situation.
+
 ## 1.1.1
 
 - Add MCP config detection to `/context-setup:context-scaffold` -- detects MCP servers during scaffolding and pre-populates MCP Tool Notes for known servers; unknown servers get a placeholder pointing to `/context-setup:context-mcp`
