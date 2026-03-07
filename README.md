@@ -70,10 +70,12 @@ context-engineering/
 ├── plugins/                            # Installable plugin (generates and maintains context)
 │   └── context-setup/                  # Scaffold, audit, align, usage, and upgrade context files
 │       ├── README.md
+│       ├── CHANGELOG.md
 │       └── skills/
 │           ├── context-scaffold/SKILL.md   # Generate context files from project analysis
 │           ├── context-audit/SKILL.md      # Evaluate structure and completeness
 │           ├── context-align/SKILL.md      # Drift detection against actual codebase
+│           ├── context-mcp/SKILL.md        # MCP server detection and optimization guidance
 │           ├── context-usage/SKILL.md      # Session-level context consumption diagnostic
 │           └── context-upgrade/SKILL.md    # Transition between complexity levels
 └── evolution.md                   # How context engineering evolved since June 2025
