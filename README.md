@@ -109,7 +109,25 @@ These patterns work regardless of which AI coding tool you use. They emerged fro
 
 **Review your context files.** They rot. Architecture decisions change, team norms evolve, tools get replaced. If your context file references a library you deprecated six months ago, it's actively misleading every AI session that reads it. Run `/context-align` after dependency upgrades, major refactors, or monthly as a hygiene check. It cross-references your context files against your actual codebase and flags what's drifted.
 
+**Reduce output before it enters context.** AI coding tools consume tokens from every command output and tool response. Command Output Notes document concise CLI invocations (flags, pipes, format options) that return only what's needed. MCP Tool Notes do the same for MCP server calls (parameter knobs like `maxResults`, `fields`, query filters). Both sections go in your AGENTS.md and apply regardless of which structural approach you use. A 100-line AGENTS.md is roughly 300-400 tokens -- well within budget. At 150+ lines you're spending 500+ tokens on context before any task-specific content loads. Cascading files let the tool load only the relevant subset.
+
 **Hybrid is the natural end state.** Most mature setups end up with a combination: an AGENTS.md for quick orientation, a context directory for depth, cascading files for cross-project consistency, and agents for recurring workflows. Start simple, add layers when the pain justifies them.
+
+## Maintaining Context Files
+
+Context files drift. Dependencies get upgraded, directories get renamed, conventions evolve. These triggers should prompt a review:
+
+- **After dependency upgrades** -- run `/context-align` to catch stale version references and removed packages
+- **After major refactoring** -- directory references, command names, and architecture descriptions may need updating
+- **After adding or removing MCP servers** -- run `/context-mcp` to update MCP Tool Notes
+- **Monthly or per-sprint** -- a lightweight hygiene check catches gradual drift before it accumulates
+
+Review workflow:
+
+1. `/context-align` -- fix any drift findings
+2. `/context-audit` -- check structural completeness
+3. Review bracket placeholders -- fill in any that are still generic
+4. Commit the updates
 
 ## Using These Examples
 

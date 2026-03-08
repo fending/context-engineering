@@ -9,6 +9,31 @@ A Claude Code plugin for scaffolding, auditing, aligning, optimizing MCP tools, 
 /plugin install context-setup@context-engineering
 ```
 
+## Quick Start
+
+1. `/context-setup:context-scaffold` -- generate AGENTS.md from your project
+2. Review the output and fill in `[bracket]` placeholders with your knowledge
+3. `/context-setup:context-audit` -- verify structure and completeness
+4. `/context-setup:context-mcp` -- if you have MCP servers connected, get optimization guidance
+5. Periodically: `/context-setup:context-align` for drift detection, `/context-setup:context-usage` mid-session for token diagnostics
+
+## Updating
+
+The plugin auto-updates when the source repo gets new commits. If your installed version seems stale (missing skills, old behavior):
+
+1. Verify: check `~/.claude/plugins/cache/context-engineering/context-setup/`. The directory name should be a git SHA (like `dea82eb8999f`), not a semver string (like `1.0.0`). If it's semver, you have the old cache format.
+
+2. Fix: remove the stale cache and marketplace clone, then reinstall:
+
+```bash
+rm -rf ~/.claude/plugins/marketplaces/context-engineering
+rm -rf ~/.claude/plugins/cache/context-engineering/context-setup/
+```
+
+Then: `/plugin install context-setup@context-engineering`
+
+3. Verify after reinstall: the cache directory should now be a git SHA, and all 6 skills should be available.
+
 ## Skills
 
 When no other installed plugin has a skill with the same name, Claude Code allows the short form -- `/context-scaffold` instead of `/context-setup:context-scaffold`. The full namespaced form always works.
