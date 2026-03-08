@@ -109,6 +109,28 @@ Agent teams work without external tooling, but syncing tasks to Jira (or a simil
 
 See the [agent-teams/](agent-teams/) directory for activation, team structure patterns, and optional Jira integration.
 
+## Installable Plugins
+
+Skills started as files you copy into your project. The next step was packaging them for installation and auto-update. Claude Code's plugin system enabled this: a plugin bundles multiple skills into a single installable unit, distributed through a marketplace backed by a GitHub repo.
+
+The [context-setup plugin](plugins/context-setup/) packages six skills that generate and maintain context files from project analysis: scaffold, audit, align, MCP optimization, usage diagnostics, and upgrade. Installing the plugin adds all six skills at once. When the source repo gets new commits, reinstalling picks up the changes automatically -- no manual file copying or version tracking.
+
+This is a different delivery mechanism from `.claude-example/`, which is designed to be copied and customized. The plugin is designed to be installed and updated. Both coexist: the plugin handles context file generation and maintenance, while the copied skills handle day-to-day operational enforcement (boundary validation, context discovery).
+
+## Token Optimization at the Documentation Layer
+
+As context files matured, a new problem surfaced: AI tools consume tokens from every command output and tool response, and default invocations are often wasteful. Running bare `npm test` might produce 200 lines when `npx vitest run 2>&1 | tail -5` produces 5. An MCP search returning 20 results at full payload when 3 would suffice.
+
+Two new AGENTS.md sections address this:
+
+**Command Output Notes** document concise CLI invocations -- flags, pipes, and format options that reduce output before it enters context. These are project-specific because the right flags depend on which test runner, linter, and build tool the project uses.
+
+**MCP Tool Notes** apply the same principle to MCP server calls. The optimization knobs are parameters (`maxResults`, `fields`, `limit`, query filters) and tool selection (read a specific message vs. an entire thread). Seven MCP server families have tested templates: Atlassian, Gmail, Google Calendar, Web, GitHub, Supabase, and Vercel.
+
+The `/context-setup:context-mcp` skill automates MCP optimization: it detects connected servers, matches them against known templates, and generates MCP Tool Notes entries. For unknown servers, it interactively inspects tool registries and optionally makes test calls to discover optimization opportunities.
+
+Both sections sit in AGENTS.md alongside the commands and tools they optimize. They work at any structural complexity level -- a minimal 40-line AGENTS.md can have Command Output Notes and MCP Tool Notes.
+
 ## Hybrid Approaches as Default
 
 The article's conclusion predicted hybrid approaches:
@@ -121,8 +143,9 @@ This prediction held, though the specific hybrid that emerged is simpler than an
 2. **Context directory** provides depth where needed (architecture decisions, business requirements)
 3. **Agents** handle recurring workflows with persistent state
 4. **Agent teams** coordinate parallel work across ownership boundaries
-5. **Skills** handle recurring single-step operations
+5. **Skills** handle recurring single-step operations (copyable or installable as plugins)
 6. **Hooks** enforce rules that context files can only declare
+7. **Token optimization sections** (Command Output Notes, MCP Tool Notes) reduce context window waste from tool calls
 
 Most practitioners don't use all of these. A solo developer might use only cascading context files. A team might add a context directory. An organization might add agents and hooks. The pattern scales with complexity rather than requiring full adoption up front.
 
@@ -135,6 +158,8 @@ Most practitioners don't use all of these. A solo developer might use only casca
 **The article didn't anticipate stateful agents.** The discussion focused on static context (documentation for AI to read). The emergence of agents with persistent state and autonomous actions was a meaningful evolution that changed what's possible with context engineering.
 
 **The article didn't anticipate multi-agent coordination.** Individual agents were a step beyond context files; agent teams were a step beyond that. The idea that multiple AI agents could work in parallel with clear ownership boundaries, shared contracts, and phased development wasn't on the radar. Neither was the natural mapping between internal agent tasks and external project trackers like Jira.
+
+**The article didn't treat token efficiency as a context concern.** Context files were about giving AI the right information, not about managing how much information tool outputs contribute to the context window. Command Output Notes and MCP Tool Notes emerged from observing that default tool invocations waste tokens on output the AI doesn't need -- and that the fix belongs in the same AGENTS.md file that documents everything else about how to work in the project.
 
 ## Key Takeaways
 
