@@ -26,13 +26,14 @@ The smallest useful context file. If your tool uses `CLAUDE.md`, symlink it: `ln
 
 ## Code Standards
 
-- [Indentation preference]
+- 2-space indentation, enforced by Prettier
 - [Import style]
 - [Naming conventions]
 - [Test expectations]
 
 ## Do NOT
 
+- Do not modify files in `src/auth/` without explicit approval
 - [Hard boundaries -- things the AI should never do]
 - [Learned-the-hard-way rules go here]
 ````

@@ -83,7 +83,7 @@ project/
 
 ### Frontend
 
-- [Indentation, import style, module system]
+- 2-space indentation, ES modules, named exports
 - [Component patterns -- functional only, server-first, etc.]
 - [Test colocation rules]
 - [CSS/styling conventions]
@@ -93,12 +93,12 @@ project/
 
 - [Indentation, type annotation expectations]
 - [Layering rules -- what goes where]
-- [Query patterns -- repository layer, no raw SQL in handlers, etc.]
+- All database queries go through the repository layer -- no raw SQL in route handlers
 - [Async conventions]
 
 ### Both
 
-- [Commit message format]
+- Conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`
 - [PR/review requirements]
 - [Test requirements for new code]
 
@@ -106,7 +106,7 @@ project/
 
 [State what's true, not why you chose it. "Multi-tenant via org-scoped auth" tells the AI what to enforce. Save the reasoning for an ADR document if you need it.]
 
-- **[Decision]:** [What it means in practice]
+- **Multi-tenant via org-scoped auth:** every query must include `org_id` in the WHERE clause. No cross-org data access.
 - **[Decision]:** [What it means in practice]
 - **[Decision]:** [What it means in practice]
 - **[Decision]:** [What it means in practice]
@@ -115,7 +115,7 @@ project/
 
 [How authentication works, what roles exist, where permissions are enforced. This section prevents the most dangerous class of AI-generated bugs -- data leaking across tenants or unauthorized access.]
 
-- [Auth provider and mechanism]
+- Auth via NextAuth with GitHub and Google providers, session stored in database
 - [Roles and what each can do]
 - [Where enforcement happens -- middleware, decorators, etc.]
 - [Client-side vs. server-side validation rules]
@@ -126,7 +126,7 @@ project/
 
 | Table | Purpose | Key Relationships |
 | ----- | ------- | ----------------- |
-| [table] | [purpose] | [relationships] |
+| users | User accounts and profiles | belongs to org, has many projects |
 | [table] | [purpose] | [relationships] |
 | [table] | [purpose] | [relationships] |
 
@@ -140,11 +140,11 @@ project/
 
 ## Do NOT
 
-- [Specific, experience-driven boundaries]
+- Do not modify webhook handlers without reviewing the event flow end-to-end
+- Do not push directly to main -- all changes go through PRs
 - [Things that broke when someone (or an AI) did them wrong]
 - [Fragile areas that need manual review]
 - [Environment/config changes that have downstream effects]
-- [Deployment or branch rules]
 ````
 
 ---
