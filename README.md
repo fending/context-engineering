@@ -129,6 +129,16 @@ Review workflow:
 3. Review bracket placeholders -- fill in any that are still generic
 4. Commit the updates
 
+### Keeping Context Files Lean
+
+Not every section of an AGENTS.md is relevant to every task. When your file grows past ~100 lines, consider which sections need to load at session start versus which can live in a `context/` directory and be read on demand:
+
+- **Always-load** (keep in root AGENTS.md): Tech Stack, Commands, Code Standards, Do NOT -- these apply to every task regardless of scope
+- **Task-dependent** (move to `context/` when file gets large): Architecture, Auth, Data Model, API Conventions, Integration Map -- these matter for some tasks but not others
+- **Session-dependent** (keep in root but understand the trade-off): Command Output Notes, MCP Tool Notes -- only relevant when those tools are used, but small enough that pre-loading is fine
+
+A 100-line root AGENTS.md is ~300 tokens. Task-dependent detail in `context/` files only loads when the agent reads those files. Run `/context-setup:context-upgrade` when your single file outgrows this structure.
+
 ## Using These Examples
 
 Every file in this repo is designed to be copied and adapted. Where examples need specifics, they use generic placeholders and describe the *kind* of content that belongs there rather than inventing fictional companies or products. The structures and patterns are drawn from real use.
