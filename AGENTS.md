@@ -8,12 +8,13 @@ A public companion repo to [Rethinking Team Topologies for AI-Augmented Developm
 
 ## Structure
 
-- `single-file-examples/` -- Four single-file AGENTS.md examples at different complexity levels
-- `directory-example/` -- Full context directory with six template files
-- `cascading-files-examples/` -- Global, project, and subdirectory cascading examples
-- `agents/` -- Agent-as-workflow pattern with two example agents and shared config
-- `agent-teams/` -- Multi-agent teams with optional Jira integration (activation, team structure, phases, templates)
-- `.claude-example/` -- Working skills and hooks configuration (copy to `.claude/`)
+- `examples/` -- All patterns and templates, organized by complexity level
+  - `single-file/` -- Four single-file AGENTS.md examples at different complexity levels
+  - `directory/` -- Full context directory with six template files
+  - `cascading-files/` -- Global, project, and subdirectory cascading examples
+  - `agents/` -- Agent-as-workflow pattern with two example agents and shared config
+  - `agent-teams/` -- Multi-agent teams with optional Jira integration (activation, team structure, phases, templates)
+- `examples/claude-config/` -- Working skills and hooks configuration (copy to `.claude/`)
 - `plugins/` -- Installable Claude Code plugins
   - `context-setup/` -- Scaffold, audit, align, optimize MCP tools, usage diagnostics, and upgrade context files
 - `evolution.md` -- What changed since the June 2025 article
@@ -34,9 +35,9 @@ Read different files depending on the task:
 - Adding or editing examples: read the target directory's `README.md` first, then the existing examples for the pattern
 - Understanding the repo's purpose and framing: `README.md`
 - Understanding what changed since the article: `evolution.md`
-- Understanding cross-agent coordination: `agents/README.md` and `agents/shared-config.json`
-- Setting up agent teams with Jira: `agent-teams/README.md`
-- Setting up skills and hooks via copy: `.claude-example/README.md`
+- Understanding cross-agent coordination: `examples/agents/README.md` and `examples/agents/shared-config.json`
+- Setting up agent teams with Jira: `examples/agent-teams/README.md`
+- Setting up skills and hooks via copy: `examples/claude-config/README.md`
 - Installing skills via plugin: `plugins/context-setup/README.md` and the SKILL.md files in its `skills/` subdirectories
 
 ## File Format Convention

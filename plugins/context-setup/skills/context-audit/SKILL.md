@@ -213,8 +213,8 @@ Order recommendations by impact: structural issues and missing sections first, f
 - **context-align** (this plugin) checks accuracy -- does your context match your code?
 - **context-mcp** (this plugin) detects MCP servers and generates optimization guidance -- are your MCP tools documented?
 - **context-usage** (this plugin) observes session tool calls -- where is context going?
-- **onboard** (`.claude-example/` skill) discovers and summarizes -- what context exists?
-- **scope-check** (`.claude-example/` skill) validates tasks against boundaries -- can I do this?
+- **onboard** (`examples/claude-config/` skill) discovers and summarizes -- what context exists?
+- **scope-check** (`examples/claude-config/` skill) validates tasks against boundaries -- can I do this?
 
 Context-audit and context-align are complementary. Audit checks whether the *structure* is right (correct sections, appropriate level, no duplication, concise commands that optimize output). Align checks whether the *content* is right (references match reality, commands work, versions are current). Run audit when you change your context structure. Run align when you change your codebase.
 

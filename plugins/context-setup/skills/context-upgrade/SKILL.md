@@ -89,7 +89,7 @@ Describe the three operational skills that complement context files:
 
 These skills consume the same AGENTS.md files that the project already has. They add operational automation on top of the declarative context layer.
 
-Note: The distribution mechanism for skills may vary. The `context-engineering` repo provides working examples in `.claude-example/skills/`. How you install them depends on your tool and workflow.
+Note: The distribution mechanism for skills may vary. The `context-engineering` repo provides working examples in `examples/claude-config/skills/`. How you install them depends on your tool and workflow.
 
 **Trigger signals** (when to add skills):
 
@@ -116,7 +116,7 @@ Explain the three-layer defense model:
 
 All three layers read the same AGENTS.md files. The context file is the single source of truth; skills and hooks are the operational enforcement layer.
 
-Note: Hook registration (settings.json format, event types) is Claude Code-specific. The hook scripts themselves are portable shell scripts. The `context-engineering` repo provides working examples in `.claude-example/`.
+Note: Hook registration (settings.json format, event types) is Claude Code-specific. The hook scripts themselves are portable shell scripts. The `context-engineering` repo provides working examples in `examples/claude-config/`.
 
 **Trigger signals** (when to add hooks):
 

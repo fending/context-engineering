@@ -62,7 +62,7 @@ Skills differ from agents in scope and statefulness. A skill is a single operati
 
 The practical impact is that recurring single-step tasks that used to require re-explaining the process each session can now be invoked by name with consistent behavior.
 
-The SKILL.md format became a cross-platform standard in December 2025, working with Claude Code, Codex CLI, and ChatGPT. In Claude Code, legacy `.claude/commands/` files still work but `.claude/skills/` is the current path. See `.claude-example/skills/` for working examples.
+The SKILL.md format became a cross-platform standard in December 2025, working with Claude Code, Codex CLI, and ChatGPT. In Claude Code, legacy `.claude/commands/` files still work but `.claude/skills/` is the current path. See `examples/claude-config/skills/` for working examples.
 
 ## MCP Servers
 
@@ -95,7 +95,7 @@ The important separation is between these three concerns:
 
 Agents also introduced the concept of "autonomous actions" -- things the AI should do without asking permission. Rather than prompting for confirmation at every step, the agent.md explicitly lists actions that should execute immediately (update state files, run standard checks, open auth URLs). This removes friction from recurring workflows without sacrificing control over dangerous operations.
 
-See the [agents/](agents/) directory for working examples.
+See the [examples/agents/](examples/agents/) directory for working examples.
 
 ## Agent Teams
 
@@ -107,7 +107,7 @@ The key design decision is ownership boundaries. Two teams with clear directory 
 
 Agent teams work without external tooling, but syncing tasks to Jira (or a similar tracker) adds external visibility and a feedback loop. Agent tasks already have the shape of tickets -- summary, description, status, owner, dependencies -- so the mapping is natural. The project owner can direct work through Jira comments without needing to be in the same terminal session.
 
-See the [agent-teams/](agent-teams/) directory for activation, team structure patterns, and optional Jira integration.
+See the [examples/agent-teams/](examples/agent-teams/) directory for activation, team structure patterns, and optional Jira integration.
 
 ## Installable Plugins
 
@@ -115,7 +115,7 @@ Skills started as files you copy into your project. The next step was packaging 
 
 The [context-setup plugin](plugins/context-setup/) packages six skills that generate and maintain context files from project analysis: scaffold, audit, align, MCP optimization, usage diagnostics, and upgrade. Installing the plugin adds all six skills at once. When the source repo gets new commits, reinstalling picks up the changes automatically -- no manual file copying or version tracking.
 
-This is a different delivery mechanism from `.claude-example/`, which is designed to be copied and customized. The plugin is designed to be installed and updated. Both coexist: the plugin handles context file generation and maintenance, while the copied skills handle day-to-day operational enforcement (boundary validation, context discovery).
+This is a different delivery mechanism from `examples/claude-config/`, which is designed to be copied and customized. The plugin is designed to be installed and updated. Both coexist: the plugin handles context file generation and maintenance, while the copied skills handle day-to-day operational enforcement (boundary validation, context discovery).
 
 ## Token Optimization at the Documentation Layer
 

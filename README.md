@@ -6,69 +6,70 @@ What you get: four levels of context architecture (single file, context director
 
 ## Start Here
 
-**New to context engineering?** Start with [single-file-examples/minimal.md](single-file-examples/minimal.md) -- a 40-line template that eliminates the two most common failure modes in AI-assisted development.
+**New to context engineering?** Start with [examples/single-file/minimal.md](examples/single-file/minimal.md) -- a 40-line template that eliminates the two most common failure modes in AI-assisted development.
 
 **Already have a context file but outgrowing it?** Read [Which Approach Should You Use](#which-approach-should-you-use) to decide whether to move to a context directory, cascading files, or agents.
 
-**Working across multiple projects?** The [cascading pattern](cascading-files-examples/) gives you consistent defaults with project-specific overrides.
+**Working across multiple projects?** The [cascading pattern](examples/cascading-files/) gives you consistent defaults with project-specific overrides.
 
-**Running multi-agent workflows?** See [agents/](agents/) for structured workflows and [agent-teams/](agent-teams/) for parallel coordination with optional Jira integration.
+**Running multi-agent workflows?** See [examples/agents/](examples/agents/) for structured workflows and [examples/agent-teams/](examples/agent-teams/) for parallel coordination with optional Jira integration.
 
-**Want to automate and enforce your context files?** Copy `.claude-example/` for working skills and hooks. See [.claude-example/README.md](.claude-example/README.md). Claude Code users can also install the [context-setup plugin](plugins/context-setup/) to scaffold, audit, align, and upgrade context files from project analysis.
+**Want to automate and enforce your context files?** Copy `examples/claude-config/` for working skills and hooks. See [examples/claude-config/README.md](examples/claude-config/README.md). Claude Code users can also install the [context-setup plugin](plugins/context-setup/) to scaffold, audit, align, and upgrade context files from project analysis.
 
 ## What's Here
 
 ```text
 context-engineering/
 ├── AGENTS.md                      # Context file for this repo (CLAUDE.md symlinked)
-├── single-file-examples/          # Single-file approach (AGENTS.md / CLAUDE.md)
-│   ├── README.md                  # When and why to use this pattern
-│   ├── minimal.md                 # Bare minimum that's still useful
-│   ├── saas-app.md                # SaaS product example
-│   ├── api-service.md             # Backend API example
-│   └── cli-tool.md                # CLI tool example
-├── directory-example/             # Multi-file context directory approach
-│   ├── README.md                  # When and why to use this pattern
-│   └── context/                   # Full working example
-│       ├── system-overview.md
-│       ├── architecture-decisions.md
-│       ├── technical-requirements.md
-│       ├── api-documentation.md
-│       ├── business-requirements.md
-│       └── working-style-guide.md
-├── cascading-files-examples/            # Cascading context (global > project > subdirectory)
-│   ├── README.md
-│   ├── global-example-agents.md   # Example: user-level defaults
-│   ├── project-example-agents.md  # Example: project-level context
-│   └── subdirectory-example-agents.md  # Example: subdirectory override
-├── agents/                        # Agent-as-workflow pattern
-│   ├── README.md
-│   ├── shared-config.json         # Cross-agent settings (services, directories, dependencies)
-│   ├── deploy/                    # Deploy agent example
-│   │   ├── agent.md
-│   │   ├── config.json
-│   │   └── state.json
-│   └── content-pipeline/          # Content pipeline agent example
-│       ├── agent.md
-│       ├── config.json
-│       └── state.json
-├── agent-teams/                   # Multi-agent teams (with optional Jira integration)
-│   ├── README.md                  # Activation, team structure, phases, optional Jira sync
-│   ├── jira-setup.md              # One-time Jira configuration (optional)
-│   ├── agents-md-jira-section.md  # AGENTS.md template for Jira sync protocol (optional)
-│   └── team-structure.md          # AGENT_TEAMS.md template for team composition
-├── .claude-example/                    # Working Claude Code config (copy to .claude/)
-│   ├── README.md                       # Setup, skills overview, hook documentation
-│   ├── skills/                         # SKILL.md examples (vendor-neutral standard)
-│   │   ├── onboard/SKILL.md           # Context structure discovery
-│   │   ├── context-align/SKILL.md     # Drift detection across context sources
-│   │   └── scope-check/SKILL.md       # Pre-task boundary validation
+├── examples/                      # Patterns and templates (copy and adapt)
+│   ├── single-file/               # Single-file approach (AGENTS.md / CLAUDE.md)
+│   │   ├── README.md              # When and why to use this pattern
+│   │   ├── minimal.md             # Bare minimum that's still useful
+│   │   ├── saas-app.md            # SaaS product example
+│   │   ├── api-service.md         # Backend API example
+│   │   └── cli-tool.md            # CLI tool example
+│   ├── directory/                 # Multi-file context directory approach
+│   │   ├── README.md              # When and why to use this pattern
+│   │   └── context/               # Full working example
+│   │       ├── system-overview.md
+│   │       ├── architecture-decisions.md
+│   │       ├── technical-requirements.md
+│   │       ├── api-documentation.md
+│   │       ├── business-requirements.md
+│   │       └── working-style-guide.md
+│   ├── cascading-files/           # Cascading context (global > project > subdirectory)
+│   │   ├── README.md
+│   │   ├── global-example-agents.md    # Example: user-level defaults
+│   │   ├── project-example-agents.md   # Example: project-level context
+│   │   └── subdirectory-example-agents.md   # Example: subdirectory override
+│   ├── agents/                    # Agent-as-workflow pattern
+│   │   ├── README.md
+│   │   ├── shared-config.json     # Cross-agent settings (services, directories, dependencies)
+│   │   ├── deploy/                # Deploy agent example
+│   │   │   ├── agent.md
+│   │   │   ├── config.json
+│   │   │   └── state.json
+│   │   └── content-pipeline/      # Content pipeline agent example
+│   │       ├── agent.md
+│   │       ├── config.json
+│   │       └── state.json
+│   └── agent-teams/               # Multi-agent teams (with optional Jira integration)
+│       ├── README.md              # Activation, team structure, phases, optional Jira sync
+│       ├── jira-setup.md          # One-time Jira configuration (optional)
+│       ├── agents-md-jira-section.md  # AGENTS.md template for Jira sync protocol (optional)
+│       └── team-structure.md      # AGENT_TEAMS.md template for team composition
+├── examples/claude-config/               # Working Claude Code config (copy to .claude/)
+│   ├── README.md                  # Setup, skills overview, hook documentation
+│   ├── skills/                    # SKILL.md examples (vendor-neutral standard)
+│   │   ├── onboard/SKILL.md      # Context structure discovery
+│   │   ├── context-align/SKILL.md # Drift detection across context sources
+│   │   └── scope-check/SKILL.md  # Pre-task boundary validation
 │   ├── hooks/
-│   │   ├── boundary-guard.sh          # Pre-tool file protection script
-│   │   └── lint-markdown.sh           # Post-tool markdown linting
-│   └── settings.json                  # Hook configurations
-├── plugins/                            # Installable plugin (generates and maintains context)
-│   └── context-setup/                  # Scaffold, audit, align, usage, and upgrade context files
+│   │   ├── boundary-guard.sh     # Pre-tool file protection script
+│   │   └── lint-markdown.sh      # Post-tool markdown linting
+│   └── settings.json             # Hook configurations
+├── plugins/                       # Installable plugin (generates and maintains context)
+│   └── context-setup/             # Scaffold, audit, align, usage, and upgrade context files
 │       ├── README.md
 │       ├── CHANGELOG.md
 │       └── skills/
@@ -95,7 +96,7 @@ This isn't a spectrum with a right answer. It's a function of your project's com
 
 **Use agent teams** when the work is large enough to split across parallel tracks. Agent teams build on the same foundation as individual agents but add multi-agent coordination: ownership boundaries, shared interface contracts, and phased development. Optionally, sync agent progress to Jira for external visibility and bidirectional feedback.
 
-**Add skills and hooks** when you want to automate workflows that consume your context files and enforce the boundaries they declare. Skills are user-invoked (discover context structure, check for drift, validate boundaries before starting). Hooks run automatically (block edits to protected files, verify symlink integrity). SKILL.md is a vendor-neutral standard, like AGENTS.md. See [.claude-example/](.claude-example/) for a ready-to-copy configuration.
+**Add skills and hooks** when you want to automate workflows that consume your context files and enforce the boundaries they declare. Skills are user-invoked (discover context structure, check for drift, validate boundaries before starting). Hooks run automatically (block edits to protected files, verify symlink integrity). SKILL.md is a vendor-neutral standard, like AGENTS.md. See [examples/claude-config/](examples/claude-config/) for a ready-to-copy configuration.
 
 ## Key Principles
 
@@ -103,7 +104,7 @@ These patterns work regardless of which AI coding tool you use. They emerged fro
 
 **Context is for both humans and AI.** If only the AI reads it, it'll drift from reality. If only humans read it, you'll spend time re-explaining things every session. Write for both audiences -- and you'll catch drift faster because humans review the same file.
 
-**Boundaries matter more than instructions.** Telling an AI what NOT to do (don't modify templates without approval, don't push to main, don't add features beyond what was asked) prevents more problems than telling it what to do. Hard-won lessons belong in context files -- each boundary is a bug you won't hit again. Enforced boundaries matter even more. A pre-tool hook can actually block edits to files your AGENTS.md marks as protected. See [.claude-example/](.claude-example/) for how declarative and imperative layers work together.
+**Boundaries matter more than instructions.** Telling an AI what NOT to do (don't modify templates without approval, don't push to main, don't add features beyond what was asked) prevents more problems than telling it what to do. Hard-won lessons belong in context files -- each boundary is a bug you won't hit again. Enforced boundaries matter even more. A pre-tool hook can actually block edits to files your AGENTS.md marks as protected. See [examples/claude-config/](examples/claude-config/) for how declarative and imperative layers work together.
 
 **State is not context.** Context files describe *how* to work. State files describe *where you are*. Keep them separate. An agent's workflow instructions (`agent.md`) shouldn't contain today's pipeline status (`state.json`). Mixing them means every session update pollutes your process documentation.
 
@@ -172,12 +173,12 @@ To install the context-setup plugin (scaffold, audit, align, and upgrade context
 To add the remaining operational skills and hooks (onboard, scope-check, boundary-guard):
 
 ```bash
-cp -r .claude-example/ .claude/
+cp -r examples/claude-config/ .claude/
 ```
 
 **For other tools:** Check your tool's documentation for its context file convention. If it reads a different filename, symlink from AGENTS.md to that name. One source of truth, multiple entry points.
 
-**Skills and hooks:** The `.claude-example/` directory demonstrates skills (SKILL.md, a vendor-neutral standard) and hooks (Claude Code configuration). The skill patterns and hook logic transfer to any tool with equivalent features. File paths and `settings.json` format are Claude Code-specific.
+**Skills and hooks:** The `examples/claude-config/` directory demonstrates skills (SKILL.md, a vendor-neutral standard) and hooks (Claude Code configuration). The skill patterns and hook logic transfer to any tool with equivalent features. File paths and `settings.json` format are Claude Code-specific.
 
 ## Background
 

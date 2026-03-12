@@ -62,9 +62,9 @@ Detect connected MCP servers across platforms, match them against known optimiza
 
 Guide a transition from your current context level to the next one. Preserves existing content while adding missing sections (minimal to full), extracting content into a context directory (full to cascading), or describing the skills and hooks layers you can add on top.
 
-## How This Differs from .claude-example Skills
+## How This Differs from claude-config Skills
 
-The `.claude-example/` directory in the parent repo provides operational skills that consume and enforce existing context files:
+The `examples/claude-config/` directory in the parent repo provides operational skills that consume and enforce existing context files:
 
 - `/onboard` discovers and summarizes what context exists
 - `/scope-check` validates tasks against boundary rules
@@ -78,9 +78,9 @@ This plugin creates, evaluates, and aligns the context files themselves:
 - `/context-setup:context-mcp` detects MCP servers and generates optimization guidance
 - `/context-setup:context-upgrade` guides transitions to higher complexity levels
 
-`context-align` appears in both places. The `.claude-example/` copy is part of a complete working `.claude/` configuration for users who copy the whole directory. The plugin version means users who only install the plugin also get drift detection without needing to copy files separately.
+`context-align` appears in both places. The `examples/claude-config/` copy is part of a complete working `.claude/` configuration for users who copy the whole directory. The plugin version means users who only install the plugin also get drift detection without needing to copy files separately.
 
-Use this plugin to set up and maintain your context structure. Use the `.claude-example/` skills to operate within it day-to-day.
+Use this plugin to set up and maintain your context structure. Use the `examples/claude-config/` skills to operate within it day-to-day.
 
 ## Learning the Patterns
 

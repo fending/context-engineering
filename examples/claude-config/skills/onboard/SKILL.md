@@ -14,7 +14,7 @@ Discover and summarize the project's context structure so you can orient quickly
    - Project root (`AGENTS.md` as primary, check for `CLAUDE.md` symlink)
    - Subdirectories (any nested `AGENTS.md` files)
    - Context directory (`context/` or similar with multiple files)
-   - Agent definitions (`agents/`, `agent-teams/`)
+   - Agent definitions (`examples/agents/`, `examples/agent-teams/`)
    - Skills (`.claude/skills/` or equivalent)
    - Hooks (`.claude/settings.json` hook configurations)
 
@@ -54,7 +54,7 @@ Report findings conversationally. This is orientation, not an audit -- surface w
 >
 > **Subdirectory** (`src/api/AGENTS.md`, modified 1 month ago): API-specific conventions for error handling and response formats.
 >
-> **Agents**: Deploy agent (`agents/deploy/`) and content pipeline (`agents/content-pipeline/`). Content pipeline state was last updated 45 days ago -- may be stale.
+> **Agents**: Deploy agent (`examples/agents/deploy/`) and content pipeline (`examples/agents/content-pipeline/`). Content pipeline state was last updated 45 days ago -- may be stale.
 >
 > **Skills**: 3 skills available (`/onboard`, `/context-align`, `/scope-check`).
 >
@@ -69,7 +69,7 @@ Report findings conversationally. This is orientation, not an audit -- surface w
 > - Investigating business requirements: `context/business-requirements.md` (product goals, user personas)
 > - Investigating architecture: `context/architecture-decisions.md` (layer rationale, data flow)
 > - Investigating the API surface: `context/api-documentation.md` (endpoints, auth requirements)
-> - Running deploy or publish workflows: `agents/deploy/` or `agents/content-pipeline/`
+> - Running deploy or publish workflows: `examples/agents/deploy/` or `examples/agents/content-pipeline/`
 
 ## Notes
 

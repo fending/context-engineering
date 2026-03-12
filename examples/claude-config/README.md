@@ -1,4 +1,4 @@
-# .claude-example
+# Claude Config Example
 
 A working `.claude/` configuration you can copy into your project. Includes skills (SKILL.md, a vendor-neutral standard) and hooks (shell scripts enforced by settings.json) that automate and enforce the context patterns in the rest of this repo.
 
@@ -7,14 +7,14 @@ A working `.claude/` configuration you can copy into your project. Includes skil
 Copy the directory into your project root:
 
 ```bash
-cp -r .claude-example .claude
+cp -r examples/claude-config .claude
 ```
 
 Or merge into an existing `.claude/` directory:
 
 ```bash
-cp -r .claude-example/skills .claude/skills
-cp -r .claude-example/hooks .claude/hooks
+cp -r examples/claude-config/skills .claude/skills
+cp -r examples/claude-config/hooks .claude/hooks
 # Merge settings.json manually if you have existing hook configurations
 ```
 
@@ -135,6 +135,6 @@ The hook logic (stdin JSON, exit codes, stderr messaging) is portable shell scri
 
 ## Relationship to Other Directories
 
-The root-level directories in this repo (`single-file-examples/`, `directory-example/`, `cascading-files-examples/`, `agents/`, `agent-teams/`) are tool-agnostic patterns. They teach context structure through copyable templates with `[bracket]` placeholders.
+The `examples/` directory in this repo (`examples/single-file/`, `examples/directory/`, `examples/cascading-files/`, `examples/agents/`, `examples/agent-teams/`) contains tool-agnostic patterns. They teach context structure through copyable templates with `[bracket]` placeholders.
 
 This directory is the operational layer. It demonstrates how to automate discovery, detect drift, validate boundaries, and enforce rules -- using the same AGENTS.md files those patterns produce. Copy the patterns from the root directories. Copy this directory to make them load-bearing.
