@@ -52,7 +52,7 @@ Generate a single `AGENTS.md` with these sections. Populate from discovered info
 
 ## MCP Tool Notes
 
-[Generate this section only if MCP server configs were detected during discovery. For each detected server that matches a known template, include the pre-populated entry. For detected servers without a known template, include a placeholder with a pointer to `/context-setup:context-mcp` for interactive discovery. If no MCP configs were detected, skip this section entirely.]
+[Generate this section only if MCP server configs were detected during discovery. Include the CLI-first preamble: "When a CLI tool and MCP server both cover the same operation, prefer CLI for reads -- CLI generally offers field selection, output piping, and documented behavior that MCP servers typically lack." For each detected server that matches a known template, include the pre-populated entry. For detected servers without a known template, include a placeholder with a pointer to `/context-setup:context-mcp` for interactive discovery. If no MCP configs were detected, skip this section entirely.]
 
 [Known server entries to use when matched -- see `/context-setup:context-mcp` SKILL.md for the full template text for each server family: Atlassian, Gmail, Google Calendar, Web, GitHub, Supabase, Vercel.]
 
@@ -91,7 +91,7 @@ Generate a single `AGENTS.md` with all minimal sections plus the following. Popu
 
 ## MCP Tool Notes
 
-[Same logic as the minimal template: generate only if MCP configs detected, use known templates for recognized servers, placeholder for unknown servers. At the full level, this section sits between Command Output Notes and Project Structure -- the same position used in the single-file examples.]
+[Same logic as the minimal template: generate only if MCP configs detected, use known templates for recognized servers, placeholder for unknown servers. Include the CLI-first preamble from the minimal template. At the full level, this section sits between Command Output Notes and Project Structure -- the same position used in the single-file examples.]
 
 ## Project Structure
 
