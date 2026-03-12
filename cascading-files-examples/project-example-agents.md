@@ -43,7 +43,7 @@ npm run lint         # Lint and format check
 
 ## MCP Tool Notes
 
-[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters prevents large responses from consuming context. Only include tools your project actually uses.]
+[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters prevents large responses from consuming context. When a CLI tool and MCP server both cover the same operation, prefer CLI for reads -- CLI generally offers field selection, output piping, and documented behavior that MCP servers typically lack. Only include tools your project actually uses.]
 
 - [tool name] -- [field limits, query filters, or pagination notes]
 - [tool name] -- [when to use a targeted call vs. a list/search call]

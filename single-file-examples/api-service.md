@@ -61,7 +61,7 @@ service/
 
 ## MCP Tool Notes
 
-[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters in tool calls prevents large responses from consuming context. Only include tools your project actually uses.]
+[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters in tool calls prevents large responses from consuming context. When a CLI tool and MCP server both cover the same operation, prefer CLI for reads -- CLI generally offers field selection, output piping, and documented behavior that MCP servers typically lack. Only include tools your project actually uses.]
 
 - **GitHub** -- [e.g., "prefer CLI over MCP for reads: `gh issue view <N> --json title,state` returns 1 line vs. ~100 lines from MCP `get_issue` (no field selection). MCP is fine for writes (creating issues, PRs)"]
 - **Supabase** -- [e.g., "`list_tables` with `verbose: false` (default) for compact output; `SELECT id, status` with `LIMIT` instead of `SELECT *` -- column selection alone is ~6x reduction"]

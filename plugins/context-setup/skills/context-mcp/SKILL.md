@@ -7,6 +7,12 @@ description: Detects connected MCP servers, matches them against known optimizat
 
 Optimize MCP tool calls the same way Command Output Notes optimizes CLI commands. Detect what MCP servers are connected, match against known templates, and generate documentation that reduces token waste from default tool parameters.
 
+## General Principle: CLI Over MCP for Reads
+
+When a CLI tool and MCP server both cover the same operation, prefer CLI for read operations. CLI tools generally offer field selection (`--json field1,field2`), output piping (`| tail -5`), and documented, predictable behavior. MCP servers typically wrap raw APIs with no field filtering -- GitHub's MCP `get_issue` returns ~100 lines where `gh issue view --json title,state` returns 1. MCP is the right choice for write operations (creating issues, sending messages) where output size doesn't matter, and for services that have no CLI equivalent.
+
+When generating MCP Tool Notes, flag cases where a CLI alternative exists and if superior in performance recommend CLI for reads alongside the MCP optimization guidance.
+
 ## What This Skill Does
 
 Two tiers: known pattern recommendations (deterministic, config-based) and interactive discovery (user-in-the-loop, for unknown servers).

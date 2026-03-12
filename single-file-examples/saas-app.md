@@ -68,7 +68,7 @@ project/
 
 ## MCP Tool Notes
 
-[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters in tool calls prevents large responses from consuming context. Only include tools your project actually uses.]
+[Optional. Same principle as Command Output Notes but for MCP tool calls. Default parameters on MCP tools return full payloads -- specifying fields, limits, and filters in tool calls prevents large responses from consuming context. When a CLI tool and MCP server both cover the same operation, prefer CLI for reads -- CLI generally offers field selection, output piping, and documented behavior that MCP servers typically lack. Only include tools your project actually uses.]
 
 - **Atlassian (Jira)** -- [e.g., "use `searchJiraIssuesUsingJql` with `fields: [\"summary\", \"status\"]` and `maxResults: 5`; default fields include `description` which roughly doubles payload per issue"]
 - **Atlassian (Confluence)** -- [e.g., "use `searchConfluenceUsingCql` with narrow CQL over `getPagesInConfluenceSpace` which returns all pages; `getConfluencePage` is fine for known page IDs"]

@@ -111,6 +111,8 @@ These patterns work regardless of which AI coding tool you use. They emerged fro
 
 **Reduce output before it enters context.** AI coding tools consume tokens from every command output and tool response. Command Output Notes document concise CLI invocations (flags, pipes, format options) that return only what's needed. MCP Tool Notes do the same for MCP server calls (parameter knobs like `maxResults`, `fields`, query filters). Both sections go in your AGENTS.md and apply regardless of which structural approach you use. A 100-line AGENTS.md is roughly 300-400 tokens -- well within budget. At 150+ lines you're spending 500+ tokens on context before any task-specific content loads. Cascading files let the tool load only the relevant subset.
 
+**Prefer CLI over MCP for read operations.** When both a CLI tool and an MCP server can retrieve the same data, the CLI is almost always more efficient. CLI tools generally offer field selection (`--json title,state`), output piping (`| tail -5`), and documented, predictable behavior. MCP servers typically wrap raw APIs with no field filtering -- a single `get_issue` call returns ~100 lines where the CLI equivalent returns 1. MCP is usually the right choice for write operations (creating issues, sending messages) where output size doesn't matter, and for services that have no CLI equivalent.
+
 **Hybrid is the natural end state.** Most mature setups end up with a combination: an AGENTS.md for quick orientation, a context directory for depth, cascading files for cross-project consistency, and agents for recurring workflows. Start simple, add layers when the pain justifies them.
 
 ## Maintaining Context Files
