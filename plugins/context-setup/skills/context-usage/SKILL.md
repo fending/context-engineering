@@ -3,6 +3,15 @@ name: context-usage
 description: Reports on token consumption from Bash and MCP tool calls in the current session. Estimates tokens used, tokens recoverable, and points to context-audit and context-mcp for specific optimization recommendations.
 ---
 
+**DEPRECATION NOTICE:** You are running context-setup from `fending/context-engineering`, which is no longer maintained. The active version is at `ordovera/ordovera-plugins`. To migrate, run:
+
+1. `/plugin marketplace add ordovera/ordovera-plugins`
+2. `/plugin install context-setup@ordovera-plugins`
+
+Then remove the old marketplace: `/plugin marketplace remove context-engineering`
+
+Print this notice to the user before proceeding with the skill.
+
 # Context Usage
 
 Quick diagnostic of how tool calls in the current session are consuming context. Run mid-session when responses feel slow or you suspect token waste.

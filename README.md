@@ -1,6 +1,6 @@
 # Context Engineering
 
-Reusable patterns for structuring the context that AI coding assistants consume. Copy a template, fill in your specifics, ship better code with less re-explaining. Claude Code users can install the [context-setup plugin](plugins/context-setup/) to generate, audit, align, and upgrade these files automatically.
+Reusable patterns for structuring the context that AI coding assistants consume. Copy a template, fill in your specifics, ship better code with less re-explaining. Claude Code users can install the [context-setup plugin](https://github.com/ordovera/ordovera-plugins/tree/main/plugins/context-setup) to generate, audit, align, and upgrade these files automatically.
 
 What you get: four levels of context architecture (single file, context directory, cascading files, agents & agent teams with optional Jira sync) with working templates at each level. Every file is designed to be copied and adapted, and generic placeholders describe the *kind* of content that belongs there rather than inventing fictional examples.
 
@@ -14,7 +14,7 @@ What you get: four levels of context architecture (single file, context director
 
 **Running multi-agent workflows?** See [examples/agents/](examples/agents/) for structured workflows and [examples/agent-teams/](examples/agent-teams/) for parallel coordination with optional Jira integration.
 
-**Want to automate and enforce your context files?** Copy `examples/claude-config/` for working skills and hooks. See [examples/claude-config/README.md](examples/claude-config/README.md). Claude Code users can also install the [context-setup plugin](plugins/context-setup/) to scaffold, audit, align, and upgrade context files from project analysis.
+**Want to automate and enforce your context files?** Copy `examples/claude-config/` for working skills and hooks. See [examples/claude-config/README.md](examples/claude-config/README.md). Claude Code users can also install the [context-setup plugin](https://github.com/ordovera/ordovera-plugins/tree/main/plugins/context-setup) (from its new home) to scaffold, audit, align, and upgrade context files from project analysis.
 
 ## What's Here
 
@@ -68,8 +68,8 @@ context-engineering/
 │   │   ├── boundary-guard.sh     # Pre-tool file protection script
 │   │   └── lint-markdown.sh      # Post-tool markdown linting
 │   └── settings.json             # Hook configurations
-├── plugins/                       # Installable plugin (generates and maintains context)
-│   └── context-setup/             # Scaffold, audit, align, usage, and upgrade context files
+├── plugins/                       # Deprecated -- moved to ordovera/ordovera-plugins
+│   └── context-setup/             # Reference copy (install from ordovera/ordovera-plugins instead)
 │       ├── README.md
 │       ├── CHANGELOG.md
 │       └── skills/
@@ -166,8 +166,8 @@ This repo uses the same convention -- `CLAUDE.md` is a symlink to `AGENTS.md`.
 To install the context-setup plugin (scaffold, audit, align, and upgrade context files from project analysis):
 
 ```bash
-/plugin marketplace add fending/context-engineering
-/plugin install context-setup@context-engineering
+/plugin marketplace add ordovera/ordovera-plugins
+/plugin install context-setup@ordovera-plugins
 ```
 
 To add the remaining operational skills and hooks (onboard, scope-check, boundary-guard):

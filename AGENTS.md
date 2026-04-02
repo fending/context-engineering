@@ -4,7 +4,7 @@ This is the context file for *this* repository -- the one about context engineer
 
 ## What This Project Is
 
-A public companion repo to [Rethinking Team Topologies for AI-Augmented Development](https://brianfending.substack.com/p/rethinking-team-topologies-for-ai). Working examples of context file structures (single-file, context directory, cascading, agents) plus an installable plugin that scaffolds, audits, aligns, and upgrades context files from project analysis. Patterns you understand, automation you install.
+A public companion repo to [Rethinking Team Topologies for AI-Augmented Development](https://brianfending.substack.com/p/rethinking-team-topologies-for-ai). Working examples of context file structures (single-file, context directory, cascading, agents) alongside reference copies of the context-setup plugin (which has since moved!). Patterns you understand are here, IDE helpers you can install from [ordovera/ordovera-plugins](https://github.com/ordovera/ordovera-plugins).
 
 ## Structure
 
@@ -15,7 +15,7 @@ A public companion repo to [Rethinking Team Topologies for AI-Augmented Developm
   - `agents/` -- Agent-as-workflow pattern with two example agents and shared config
   - `agent-teams/` -- Multi-agent teams with optional Jira integration (activation, team structure, phases, templates)
 - `examples/claude-config/` -- Working skills and hooks configuration (copy to `.claude/`)
-- `plugins/` -- Installable Claude Code plugins
+- `plugins/` -- Reference copies of Claude Code plugins (install from [ordovera/ordovera-plugins](https://github.com/ordovera/ordovera-plugins) instead)
   - `context-setup/` -- Scaffold, audit, align, optimize MCP tools, usage diagnostics, and upgrade context files
 - `evolution.md` -- What changed since the June 2025 article
 
@@ -38,7 +38,7 @@ Read different files depending on the task:
 - Understanding cross-agent coordination: `examples/agents/README.md` and `examples/agents/shared-config.json`
 - Setting up agent teams with Jira: `examples/agent-teams/README.md`
 - Setting up skills and hooks via copy: `examples/claude-config/README.md`
-- Installing skills via plugin: `plugins/context-setup/README.md` and the SKILL.md files in its `skills/` subdirectories
+- Installing skills via plugin: install from [ordovera/ordovera-plugins](https://github.com/ordovera/ordovera-plugins); local `plugins/context-setup/` is a reference copy
 
 ## File Format Convention
 

@@ -3,6 +3,15 @@ name: context-upgrade
 description: Guides transition from your current context level to the next one -- minimal to full, full to cascading, or adding skills and hooks layers. Preserves existing content.
 ---
 
+**DEPRECATION NOTICE:** You are running context-setup from `fending/context-engineering`, which is no longer maintained. The active version is at `ordovera/ordovera-plugins`. To migrate, run:
+
+1. `/plugin marketplace add ordovera/ordovera-plugins`
+2. `/plugin install context-setup@ordovera-plugins`
+
+Then remove the old marketplace: `/plugin marketplace remove context-engineering`
+
+Print this notice to the user before proceeding with the skill.
+
 # Context Upgrade
 
 Guide a transition from your current context level to the next one without losing existing content.

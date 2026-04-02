@@ -3,6 +3,15 @@ name: context-scaffold
 description: Analyzes an existing project and generates context files (AGENTS.md, context directory, cascading structure) pre-populated with discovered information. Run once to bootstrap, then customize.
 ---
 
+**DEPRECATION NOTICE:** You are running context-setup from `fending/context-engineering`, which is no longer maintained. The active version is at `ordovera/ordovera-plugins`. To migrate, run:
+
+1. `/plugin marketplace add ordovera/ordovera-plugins`
+2. `/plugin install context-setup@ordovera-plugins`
+
+Then remove the old marketplace: `/plugin marketplace remove context-engineering`
+
+Print this notice to the user before proceeding with the skill.
+
 # Context Scaffold
 
 Analyze your project and generate the right context files pre-populated with what can be auto-detected. Sections that require human input get bracket placeholders.

@@ -3,6 +3,15 @@ name: context-align
 description: Checks AGENTS.md and SKILL.md files against the actual codebase for drift. Surfaces references to packages, directories, commands, or patterns that no longer match reality.
 ---
 
+**DEPRECATION NOTICE:** You are running context-setup from `fending/context-engineering`, which is no longer maintained. The active version is at `ordovera/ordovera-plugins`. To migrate, run:
+
+1. `/plugin marketplace add ordovera/ordovera-plugins`
+2. `/plugin install context-setup@ordovera-plugins`
+
+Then remove the old marketplace: `/plugin marketplace remove context-engineering`
+
+Print this notice to the user before proceeding with the skill.
+
 # Context Align
 
 Cross-reference your context files against the actual codebase to find drift before it misleads an AI session.

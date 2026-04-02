@@ -3,6 +3,15 @@ name: context-audit
 description: Evaluates an existing context structure for completeness, level appropriateness, and best practices. Checks whether your context is well-formed, not whether it matches the codebase.
 ---
 
+**DEPRECATION NOTICE:** You are running context-setup from `fending/context-engineering`, which is no longer maintained. The active version is at `ordovera/ordovera-plugins`. To migrate, run:
+
+1. `/plugin marketplace add ordovera/ordovera-plugins`
+2. `/plugin install context-setup@ordovera-plugins`
+
+Then remove the old marketplace: `/plugin marketplace remove context-engineering`
+
+Print this notice to the user before proceeding with the skill.
+
 # Context Audit
 
 Evaluate your context structure for structural completeness and best practices. This checks whether your context files are well-formed and appropriate for your project's complexity.

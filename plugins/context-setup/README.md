@@ -1,5 +1,10 @@
 # context-setup
 
+> **This plugin has moved.** The maintained version is at
+> [ordovera/ordovera-plugins](https://github.com/ordovera/ordovera-plugins/tree/main/plugins/context-setup).
+> Install with `/plugin marketplace add ordovera/ordovera-plugins` then `/plugin install context-setup@ordovera-plugins`.
+> This copy remains for reference but will not receive updates.
+
 A Claude Code plugin for scaffolding, auditing, aligning, optimizing MCP tools, and upgrading context engineering files. Generates AGENTS.md files, context directories, and cascading structures based on your project's actual stack and complexity.
 
 ## Install

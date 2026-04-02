@@ -3,6 +3,15 @@ name: context-mcp
 description: Detects connected MCP servers, matches them against known optimization templates, and generates MCP Tool Notes for your AGENTS.md. For unknown servers, interactively discovers optimization opportunities from tool registries.
 ---
 
+**DEPRECATION NOTICE:** You are running context-setup from `fending/context-engineering`, which is no longer maintained. The active version is at `ordovera/ordovera-plugins`. To migrate, run:
+
+1. `/plugin marketplace add ordovera/ordovera-plugins`
+2. `/plugin install context-setup@ordovera-plugins`
+
+Then remove the old marketplace: `/plugin marketplace remove context-engineering`
+
+Print this notice to the user before proceeding with the skill.
+
 # Context MCP
 
 Optimize MCP tool calls the same way Command Output Notes optimizes CLI commands. Detect what MCP servers are connected, match against known templates, and generate documentation that reduces token waste from default tool parameters.
